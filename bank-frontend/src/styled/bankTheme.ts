@@ -6,7 +6,7 @@ export const lightTheme1 = {
     ...theme.colors,
 
     Background: "#eff0f3",
-    BackgroundHover: "#dee1e3f0",
+    BackgroundHover: "#dee1e3",
     Headline: "#0d0d0d",
     Paragraph: "#2a2a2a",
     LightParagraph: "#4a4a4a",

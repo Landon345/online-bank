@@ -6,18 +6,21 @@ type NavbarProps = {};
 
 const Navbar: React.FC = ({}: NavbarProps) => {
   return (
-    <Box d="flex" justifyContent="space-between" alignItems="center">
-      <Box>
-        <Link to="/">LOGO</Link>
+    <>
+      <Box d="flex" justifyContent="space-between" alignItems="center" px="15%">
+        <Box>
+          <Link to="/">LOGO</Link>
+        </Box>
+        <Box d="flex" justifyContent="center" alignItems="center">
+          <Link to="/about">About Us</Link>
+          <Box>Contact Us</Box>
+          <Link to="/help">Help</Link>
+          <Box>Search</Box>
+          <Button>Log In</Button>
+        </Box>
       </Box>
-      <Box d="flex" justContent="center">
-        <Link to="/about">About Us</Link>
-        <Box>Contact Us</Box>
-        <Link to="/help">Help</Link>
-        <Box>Search</Box>
-        <Button>Log In</Button>
-      </Box>
-    </Box>
+      <hr />
+    </>
   );
 };
 
