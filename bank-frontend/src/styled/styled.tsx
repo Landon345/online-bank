@@ -10,6 +10,9 @@ type Theme = {
     Button: string;
     ButtonHover: string;
     ButtonText: string;
+    Button2: string;
+    ButtonHover2: string;
+    ButtonText2: string;
     Hr: string;
     ImageHover: string;
 
