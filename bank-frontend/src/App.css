@@ -3,5 +3,82 @@
 }
 a {
   text-decoration: none;
-  color: #3366ff;
+  color: #355acb;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+}
+li {
+  padding: 10px 0px;
+}
+hr {
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.tab--selected {
+  color: black;
+  background-color: red;
+}
+.tab-panel--selected {
+  color: black;
+  background-color: white;
+}
+
+.tabList {
+  border-bottom: 1px solid black;
+  margin: 0 0 0px;
+  padding: 0;
+}
+
+.tab {
+  display: inline-block;
+  border-right: 1px solid black;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  font-weight: 700;
+  color: #355acb;
+  list-style: none;
+  padding: 15px 12px;
+  cursor: pointer;
+}
+
+.tab--selected {
+  background: white;
+  border-color: black;
+  color: black;
+  font-weight: 700;
+  border-radius: 0px 0px 0 0;
+}
+
+.tab:hover {
+  background-color: #e3e3e3;
+}
+.tab--selected:hover {
+  background: white;
+}
+
+.tab:focus:after {
+  content: "";
+  position: absolute;
+  /* height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px; */
+  background: #fff;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel--selected {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  display: block;
 }

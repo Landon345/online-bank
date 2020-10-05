@@ -17,49 +17,62 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
 
   return (
     <>
-      <Box d="flex" justifyContent="flex-start" alignItems="center" bg="white">
+      <Box
+        d="flex"
+        justifyContent="flex-start"
+        alignItems="center"
+        bg="white"
+        px="20%"
+        borderBottom={showDropDown && "1px solid Gray"}
+      >
         <Box
           onClick={() => dropdown("savings")}
-          color={showDropDown == "savings" ? "Button" : ""}
-          p="10px"
-          mx="10px"
+          color={showDropDown == "savings" ? "Button" : "Headline"}
+          py="22px"
+          mr="20px"
           cursor="pointer"
+          tabIndex={0}
         >
           Checking &amp; Savings <Icon name="chevron-down" />
         </Box>
+
         <Box
           onClick={() => dropdown("investing")}
-          color={showDropDown == "investing" ? "Button" : ""}
-          p="10px"
-          mx="10px"
+          color={showDropDown == "investing" ? "Button" : "Headline"}
+          py="22px"
+          mr="20px"
           cursor="pointer"
+          tabIndex={0}
         >
           Investing &amp; Retirement <Icon name="chevron-down" />
         </Box>
         <Box
           onClick={() => dropdown("mortgage")}
-          color={showDropDown == "mortgage" ? "Button" : ""}
-          p="10px"
-          mx="10px"
+          color={showDropDown == "mortgage" ? "Button" : "Headline"}
+          py="22px"
+          mr="20px"
           cursor="pointer"
+          tabIndex={0}
         >
           Mortgage <Icon name="chevron-down" />
         </Box>
         <Box
           onClick={() => dropdown("auto")}
-          color={showDropDown == "auto" ? "Button" : ""}
-          p="10px"
-          mx="10px"
+          color={showDropDown == "auto" ? "Button" : "Headline"}
+          py="22px"
+          mr="20px"
           cursor="pointer"
+          tabIndex={0}
         >
           Auto <Icon name="chevron-down" />
         </Box>
         <Box
           onClick={() => dropdown("personal")}
-          color={showDropDown == "personal" ? "Button" : ""}
-          p="10px"
-          mx="10px"
+          color={showDropDown == "personal" ? "Button" : "Headline"}
+          py="22px"
+          mr="20px"
           cursor="pointer"
+          tabIndex={0}
         >
           Personal Loans <Icon name="chevron-down" />
         </Box>
@@ -67,8 +80,14 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
       {showDropDown == "savings" && (
         <>
           <DropDown
-            text="savings dropdown"
-            button="Open Account"
+            text={
+              <p>
+                Deposit products are offered by Ally Bank
+                <strong>Member FDIC.</strong>
+              </p>
+            }
+            moreLinks={[]}
+            button={{ link: "/bank/view-rates/", title: "Open Account" }}
             open={showDropDown ? true : false}
             headlinesLinks={[
               {
@@ -131,9 +150,15 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
       {showDropDown == "investing" && (
         <>
           <DropDown
-            text="investing dropdown"
+            text={
+              <p>
+                Investment products offered through Ally Invest are NOT FDIC
+                insured, ARE NOT BANK GUARANTEED and MAY LOSE VALUE.
+              </p>
+            }
+            moreLinks={[]}
             open={showDropDown ? true : false}
-            button="Open Account"
+            button={{ link: "", title: "Get Started" }}
             headlinesLinks={[
               {
                 headline: "What We Offer",
@@ -193,67 +218,39 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
       {showDropDown == "mortgage" && (
         <>
           <DropDown
-            text="mortgage dropdown"
-            button="Open Account"
-            open={showDropDown ? true : false}
-            headlinesLinks={[
-              { headline: "What We Offer", links: [{ link: "", title: "" }] },
-              { headline: "What We Offer", links: [{ link: "", title: "" }] },
-              { headline: "What We Offer", links: [{ link: "", title: "" }] },
+            text={
+              <p>
+                Mortgage products are offered by Ally Bank{" "}
+                <strong>Equal Housing Lender.</strong>
+              </p>
+            }
+            button={{ link: "", title: "Get Started" }}
+            moreLinks={[
+              { link: "", title: "Complete your saved application" },
+              { link: "", title: "Mortgage online services" },
             ]}
-          />
-        </>
-      )}
-      {showDropDown == "auto" && (
-        <>
-          <DropDown
-            text="auto dropdown"
-            button="Open Account"
-            open={showDropDown ? true : false}
-            headlinesLinks={[
-              { headline: "What We Offer", links: [{ link: "", title: "" }] },
-              { headline: "What We Offer", links: [{ link: "", title: "" }] },
-              { headline: "What We Offer", links: [{ link: "", title: "" }] },
-            ]}
-          />
-        </>
-      )}
-      {showDropDown == "personal" && (
-        <>
-          <DropDown
-            text="personal dropdown"
-            button="Open Account"
             open={showDropDown ? true : false}
             headlinesLinks={[
               {
                 headline: "What We Offer",
                 links: [
-                  {
-                    link: "/bank/online-savings-account",
-                    title: "Online Savings",
-                  },
-                  { link: "", title: "Money Market" },
-                  { link: "", title: "Interest Checking" },
-                  { link: "", title: "HighYield CD" },
-                  { link: "", title: "Raise Your Rate CD" },
-                  { link: "", title: "No Penalty CD" },
+                  { link: "", title: "Home Purchase" },
+                  { link: "", title: "Mortgage Refinancing" },
                 ],
               },
               {
-                headline: "Banking Better",
+                headline: "Tools",
                 links: [
-                  { link: "", title: "Overview" },
-                  { link: "", title: "Learn about Trusts" },
-                  { link: "", title: "Compare CDs" },
-                  { link: "", title: "Compare Savings Accounts" },
+                  { link: "", title: "Affordability Calculator" },
+                  { link: "", title: "Mortgage Payment Calculator" },
+                  { link: "", title: "Refinance Calculator" },
                 ],
               },
               {
                 headline: "Explore",
                 links: [
-                  { link: "", title: "How to Bank With Us" },
-                  { link: "", title: "Why Bank With Us" },
-                  { link: "", title: "ATM Locator" },
+                  { link: "", title: "Help for the First-time Homebuyer" },
+                  { link: "", title: "Jumbo Loans & Rates" },
                   { link: "", title: "Money & Milestones" },
                 ],
               },
@@ -263,18 +260,132 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
                   {
                     link: "",
                     title:
-                      "CDs cs. Savings: Where to Age Your Money for Your Short-Term Goals",
+                      "Going for a mortgage? Here Are the Home Loan Documents You Might Need",
+                  },
+                  {
+                    link: "",
+                    title: "What Is PMI or Private Mortgage Insurance",
                   },
                   {
                     link: "",
                     title:
-                      "Your A to Z Guide on How to Save Money on Just About Everything",
+                      "Home Shopping? Don't Let These 10 Comon Myths Bust Your Search",
+                  },
+                  { link: "", title: "View More" },
+                ],
+              },
+            ]}
+          />
+        </>
+      )}
+      {showDropDown == "auto" && (
+        <>
+          <DropDown
+            text=""
+            moreLinks={[{ link: "", title: "Make a payment" }]}
+            button={{ link: "", title: "Enroll in Online Services" }}
+            open={showDropDown ? true : false}
+            headlinesLinks={[
+              {
+                headline: "Vehicle Financing",
+                links: [
+                  { link: "", title: "Personal" },
+                  { link: "", title: "Business" },
+                ],
+              },
+              {
+                headline: "Tools",
+                links: [
+                  { link: "", title: "Monthly Car Payment Calculator" },
+                  { link: "", title: "Find a Dealer" },
+                  { link: "", title: "Title Tracker" },
+                ],
+              },
+              {
+                headline: "Explore",
+                links: [
+                  { link: "", title: "Managing Your Accont Online" },
+                  { link: "", title: "Lease-End Process" },
+                  { link: "", title: "Vehicle Protection Benefits & Support" },
+                  { link: "", title: "Money & Milestones" },
+                ],
+              },
+              {
+                headline: "Vehicle Protection",
+                links: [
+                  { link: "", title: "Vehicle Service Contracts" },
+                  { link: "", title: "Find a Protection Product" },
+                ],
+              },
+              {
+                headline: "You Might Like",
+                links: [
+                  { link: "", title: "Should You Buy a New or Used Car?" },
+                  {
+                    link: "",
+                    title: "Buying vs. Leasing: Which Is Right for You?",
+                  },
+                  {
+                    link: "",
+                    title: "5 Costly Auto Repairs and How to Avoid Them",
+                  },
+                  { link: "", title: "View More" },
+                ],
+              },
+            ]}
+          />
+        </>
+      )}
+      {showDropDown == "personal" && (
+        <>
+          <DropDown
+            text={
+              <p>
+                Ally Lending products are offered by Ally Bank{" "}
+                <strong>Member FDIC.</strong>
+              </p>
+            }
+            moreLinks={[
+              { link: "", title: "Make a payment" },
+              {
+                link: "",
+                title: "Information for Providers & Business Owners",
+              },
+            ]}
+            button={{ link: "", title: "Enroll in Online Services" }}
+            open={showDropDown ? true : false}
+            headlinesLinks={[
+              {
+                headline: "Financing Options",
+                links: [
+                  {
+                    link: "",
+                    title: "Medical Treatments & Procedures",
+                  },
+                  { link: "", title: "Repairs & Renovations" },
+                ],
+              },
+              {
+                headline: "Explore",
+                links: [
+                  { link: "", title: "Managing Your Account Online" },
+                  { link: "", title: "Money & Milestones" },
+                ],
+              },
+              {
+                headline: "You Might Like",
+                links: [
+                  {
+                    link: "",
+                    title:
+                      "Borrowing Basics: The Ins and Outs of Loans, Mortgages, and Credit Lines",
                   },
                   {
                     link: "",
                     title:
-                      "Should You Open Multiple Savings Accounts? Learn the Pros and Cons Here",
+                      "How APR Works & What It Means for Your Loan or Credit Card",
                   },
+                  { link: "", title: "Your Financial Survival Action Plan" },
                   { link: "", title: "View More" },
                 ],
               },

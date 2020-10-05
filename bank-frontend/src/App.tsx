@@ -14,8 +14,11 @@ import Navbar from "src/sharedComponents/Navbar";
 import Home from "src/home/Home";
 import Help from "src/help/Help";
 import About from "src/about/About";
+import ViewRates from "src/view-rates/ViewRates";
+import OpenAccount from "src/open-account/OpenAccount";
 
 import "./App.css";
+import Footer from "src/sharedComponents/Footer";
 
 function App() {
   return (
@@ -33,10 +36,16 @@ function App() {
             <Route path="/help" exact>
               <Help />
             </Route>
-            <Route path="/bank/open-account" exact></Route>
+            <Route path="/bank/view-rates" exact>
+              <ViewRates />
+            </Route>
+            <Route path="/open-account" exact>
+              <OpenAccount />
+            </Route>
             <Route path="/bank/savings" exact></Route>
             <Route path="/bank/checking" exact></Route>
           </Switch>
+          <Footer />
         </Box>
       </ThemeProvider>
     </Router>

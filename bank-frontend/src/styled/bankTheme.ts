@@ -5,16 +5,21 @@ export const lightTheme1 = {
   colors: {
     ...theme.colors,
 
-    Background: "#eff0f3",
-    BackgroundHover: "#dee1e3",
+    GrayBackground: "#efefef",
+    Background: "#fffffe",
+    BackgroundHover: "#f3f3f3",
     Headline: "#0d0d0d",
     Paragraph: "#2a2a2a",
     LightParagraph: "#4a4a4a",
     Button: "#ff8e3c",
     ButtonHover: "#ff7211",
     ButtonText: "#0d0d0d",
+    Button2: "#aaccff",
+    ButtonHover2: "#bbddff",
+    ButtonText2: "#355acb",
     Hr: "#cec8c1",
     ImageHover: "#eff0f3d0",
+    Link: "#355acb",
 
     CardBackground: "#fffffe",
     CardHeadline: "#0d0d0d",
