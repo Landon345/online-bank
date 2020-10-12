@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Box, Icon } from "@chakra-ui/core";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { accountTypeMapping } from "src/data/MappingData";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import * as faqs from "src/data/FAQsData";
 import {
   RadioInput,
   RadioLabel,
@@ -10,21 +11,9 @@ import {
   TextLabel,
 } from "src/open-account/style";
 import "react-tabs/style/react-tabs.css";
+import FAQs from "src/open-account/FAQs";
 import HomeNavbar from "src/sharedComponents/HomeNavbar";
 import CDs from "src/view-rates/CDs";
-
-const accountTypeMapping = {
-  "CD-3": "High Yield 3 Month CD",
-  "CD-6": "High Yield 6 Month CD",
-  "CD-9": "High Yield 9 Month CD",
-  "CD-12": "High Yield 12 Month CD",
-  "CD-18": "High Yield 18 Month CD",
-  "CD-36": "High Yield 3 Year CD",
-  "CD-60": "High Yield 5 Year CD",
-  "CDRYR-48": "Raise Your Rate 4 Year CD",
-  "CDRYR-24": "Raise Your Rate 2 Year CD",
-  "NCD-11": "No Penalty 11 Month CD",
-};
 
 type OpenAccountProps = {
   OAP: string;
@@ -39,12 +28,21 @@ const OpenAccount: React.FC = ({
   location,
 }: RouteComponentProps<TParams>) => {
   const [locationParams, setLocationParams] = useState(
-    location.search ? location.search : ""
+    location.search ? location.search.split("=")[1] : ""
   );
   const [existing, setExisting] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    localStorage.removeItem("accountpreset");
+  }, []);
+
   const Login = () => {};
+  const goToCreateAccounts = () => {
+    localStorage.setItem("accountpreset", location.search.split("=")[1]);
+    history.push("/open-account/create-accounts");
+  };
   const radioButtonChange = (e) => {
     setExisting(e.target.value);
   };
@@ -87,96 +85,110 @@ const OpenAccount: React.FC = ({
             <Box color="Gray">5 Enroll</Box>
           </Box>
         </Box>
-        <Box width="60%">
-          <Box py="20px">You can open an account in 5 minutes or less.</Box>
-          {locationParams && (
-            <Box border="1px solid black" p="20px" bg="Background">
-              {accountTypeMapping[locationParams.split("=")[1]]}
-            </Box>
-          )}
-
-          <Box border="1px solid black" p="20px" bg="LightGrayBackground">
-            <Box d="flex" py="20px">
-              <Box flex={0.7}>Choose the option that describes you best.</Box>
-
-              <Box flex={0.3}>
-                <Link>Have you placed a security freeze on your credit?</Link>
-              </Box>
-            </Box>
-
-            <Box onChange={radioButtonChange} d="flex" flexDir="column">
-              <RadioLabel htmlFor="notExisting">
-                <RadioInput
-                  type="radio"
-                  id="notExisting"
-                  name="existing"
-                  value="notExisting"
-                />{" "}
-                I'm not an existing Orion Bank customer{" "}
-              </RadioLabel>
-              <RadioLabel htmlFor="Existing">
-                <RadioInput
-                  type="radio"
-                  id="Existing"
-                  name="existing"
-                  value="existing"
-                />{" "}
-                I already have an account with Orion Bank or Orion Invest{" "}
-              </RadioLabel>
-            </Box>
-            {existing === "notExisting" && (
-              <ContinueButton
-                onClick={() => history.push("/open-account/create-accounts")}
-              >
-                Continue
-              </ContinueButton>
-            )}
-            {existing === "existing" && (
-              <Box w="50%" ml="45px">
-                <Box d="grid" gridTemplateColumns="1fr 1fr">
-                  <TextLabel htmlFor="username">Username</TextLabel>
-                  <TextInput
-                    type="text"
-                    id="username"
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-
-                  <TextLabel htmlFor="password">Password</TextLabel>
-                  <TextInput
-                    type="password"
-                    id="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </Box>
-                <Box p="10px">
-                  Forgot <Link>username</Link> or <Link>password</Link>?
-                </Box>
-                <ContinueButton onClick={Login}>Log In</ContinueButton>
+        <Box d="flex">
+          <Box flex={0.6}>
+            <Box py="20px">You can open an account in 5 minutes or less.</Box>
+            {locationParams && (
+              <Box border="1px solid black" p="20px" bg="Background">
+                {accountTypeMapping[locationParams]}
               </Box>
             )}
+
+            <Box border="1px solid black" p="20px" bg="LightGrayBackground">
+              <Box d="flex" py="20px">
+                <Box flex={0.7}>Choose the option that describes you best.</Box>
+
+                <Box flex={0.3}>
+                  <Link>Have you placed a security freeze on your credit?</Link>
+                </Box>
+              </Box>
+
+              <Box onChange={radioButtonChange} d="flex" flexDir="column">
+                <RadioLabel htmlFor="notExisting">
+                  <RadioInput
+                    type="radio"
+                    id="notExisting"
+                    name="existing"
+                    value="notExisting"
+                  />{" "}
+                  I'm not an existing Orion Bank customer{" "}
+                </RadioLabel>
+                <RadioLabel htmlFor="Existing">
+                  <RadioInput
+                    type="radio"
+                    id="Existing"
+                    name="existing"
+                    value="existing"
+                  />{" "}
+                  I already have an account with Orion Bank or Orion Invest{" "}
+                </RadioLabel>
+              </Box>
+              {existing === "notExisting" && (
+                <ContinueButton onClick={goToCreateAccounts}>
+                  Continue
+                </ContinueButton>
+              )}
+              {existing === "existing" && (
+                <Box w="50%" ml="45px">
+                  <Box d="grid" gridTemplateColumns="1fr 1fr">
+                    <TextLabel htmlFor="username">Username</TextLabel>
+                    <TextInput
+                      type="text"
+                      id="username"
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+
+                    <TextLabel htmlFor="password">Password</TextLabel>
+                    <TextInput
+                      type="password"
+                      id="password"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </Box>
+                  <Box p="10px">
+                    Forgot <Link>username</Link> or <Link>password</Link>?
+                  </Box>
+                  <ContinueButton onClick={Login}>Log In</ContinueButton>
+                </Box>
+              )}
+            </Box>
+            <Box my="35px" w="80%" color="Paragraph">
+              <Box fontSize="20px" fontWeight="600">
+                What you need to apply
+              </Box>
+              <Box my="10px">
+                Each account owner must be 18 or older and provide:
+              </Box>
+              <ul>
+                <li>A Social Security or Tax Identification number</li>
+                <li>A U.S. residential street address</li>
+                <li>Legal name</li>
+                <li>Birth date</li>
+              </ul>
+              <Box fontSize="20px" fontWeight="600" mt="20px">
+                Important Information About Opening a New Account
+              </Box>
+              <Box my="10px" lineHeight={1.5}>
+                To help the U.S. government fight terrorism and money
+                laundering, federal law requires us to obtain, verify and record
+                information identifying each person opening an account. We may
+                ask to see your driver's license or other identifying documents.
+              </Box>
+            </Box>
           </Box>
-          <Box my="35px" w="80%" color="Paragraph">
-            <Box fontSize="20px" fontWeight="600">
-              What you need to apply
-            </Box>
-            <Box my="10px">
-              Each account owner must be 18 or older and provide:
-            </Box>
-            <ul>
-              <li>A Social Security or Tax Identification number</li>
-              <li>A U.S. residential street address</li>
-              <li>Legal name</li>
-              <li>Birth date</li>
-            </ul>
-            <Box fontSize="20px" fontWeight="600" mt="20px">
-              Important Information About Opening a New Account
-            </Box>
-            <Box my="10px" lineHeight={1.5}>
-              To help the U.S. government fight terrorism and money laundering,
-              federal law requires us to obtain, verify and record information
-              identifying each person opening an account. We may ask to see your
-              driver's license or other identifying documents.
-            </Box>
+          <Box flex={0.4} ml="50px">
+            {/* Faqs */}
+            <FAQs
+              faqs={[
+                faqs.WhatAreBuckets,
+                faqs.AmIEarningInterestOnMoneyInMyBuckets,
+                faqs.WhatIsABooster,
+                faqs.HowDoIOpenAJointAccount,
+                faqs.HowDoIOpenATrustOrCustodialAccount,
+                faqs.CanIApplyByPhone,
+                faqs.IsAllyBankFDICInsured,
+              ]}
+            />
           </Box>
         </Box>
       </Box>

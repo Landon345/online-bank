@@ -82,7 +82,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
           <DropDown
             text={
               <p>
-                Deposit products are offered by Ally Bank
+                Deposit products are offered by Orion Bank
                 <strong>Member FDIC.</strong>
               </p>
             }
@@ -152,7 +152,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
           <DropDown
             text={
               <p>
-                Investment products offered through Ally Invest are NOT FDIC
+                Investment products offered through Orion Invest are NOT FDIC
                 insured, ARE NOT BANK GUARANTEED and MAY LOSE VALUE.
               </p>
             }
@@ -189,7 +189,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
                   { link: "", title: "Investing With Us" },
                   { link: "", title: "IRA Overview" },
                   { link: "", title: "Money & Milestones" },
-                  { link: "", title: "Ally Invest API" },
+                  { link: "", title: "Orion Invest API" },
                 ],
               },
               {
@@ -220,7 +220,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
           <DropDown
             text={
               <p>
-                Mortgage products are offered by Ally Bank{" "}
+                Mortgage products are offered by Orion Bank{" "}
                 <strong>Equal Housing Lender.</strong>
               </p>
             }
@@ -341,7 +341,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
           <DropDown
             text={
               <p>
-                Ally Lending products are offered by Ally Bank{" "}
+                Orion Lending products are offered by Orion Bank{" "}
                 <strong>Member FDIC.</strong>
               </p>
             }
