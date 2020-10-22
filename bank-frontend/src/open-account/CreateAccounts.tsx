@@ -1,8 +1,8 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useEffect } from "react";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { Box, Select } from "@chakra-ui/core";
 import { useRecoilState } from "recoil";
-import { textState } from "src/recoil/atoms";
+import { textState, createdAccountsState } from "src/recoil/atoms";
 import {
   RadioInput,
   RadioLabel,
@@ -10,6 +10,7 @@ import {
   CheckBoxLabel,
   ContinueButton,
   TextInput,
+  RemoveButton,
   TextLabel,
 } from "src/open-account/style";
 import AccountStep from "src/open-account/AccountStep";
@@ -26,6 +27,7 @@ type TParams = {};
 const CreateAccounts: React.FC<CreateAccountsProps> = ({
   history,
 }: RouteComponentProps<TParams>) => {
+  const [accountId, setAccountId] = useState(1);
   const [text, setText] = useRecoilState(textState);
   const [accountType, setAccountType] = useState("individualAccountType");
   const [cdTerm, setCDTerm] = useState(
@@ -39,6 +41,10 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
   const [debit, setDebit] = useState(false);
   const [checks, setChecks] = useState(false);
   const [transfers, setTransfers] = useState(false);
+
+  const [createdAccounts, setCreatedAccounts] = useRecoilState(
+    createdAccountsState
+  );
 
   const accountTypeChange = (e) => {
     setAccountType(e.target.value);
@@ -54,8 +60,29 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
     return accountCategory == "mm" || accountCategory == "check";
   };
 
-  const nextStep = async (e: FormEvent) => {
-    e.preventDefault();
+  const addAccount = () => {
+    const accountToAdd = {
+      accountId,
+      accountType,
+      accountCategory,
+      cdTerm,
+      amount,
+      debit,
+      checks,
+      transfers,
+    };
+    setCreatedAccounts((prev) => [...prev, accountToAdd]);
+    setAccountId((prev) => prev + 1);
+    // reset
+    setAmount(0);
+    setCDTerm("");
+  };
+  const removeAccount = (id) => {
+    setCreatedAccounts((prev) =>
+      prev.filter((account) => account.accountId != id)
+    );
+  };
+  const nextStep = async () => {
     history.push("/open-account/your-information");
   };
 
@@ -69,59 +96,67 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
               Create Accounts
             </Box>
             <Box ml="2%">
-              <form onSubmit={nextStep}>
+              <Box>
                 <Box
                   d="grid"
                   gridTemplateColumns="1fr 4fr"
                   gridRowGap={10}
                   mt="20px"
                 >
-                  <Box mt="10px" fontWeight="600">
-                    Select Account Type
-                  </Box>
-                  <Box onChange={accountTypeChange} d="flex" flexDir="column">
-                    <RadioLabel htmlFor="individualAccountType">
-                      <RadioInput
-                        type="radio"
-                        id="individualAccountType"
-                        name="accountType"
-                        value="individualAccountType"
-                        defaultChecked
-                      />{" "}
-                      Individual
-                    </RadioLabel>
-                    <RadioLabel htmlFor="jointAccountType">
-                      <RadioInput
-                        type="radio"
-                        id="jointAccountType"
-                        name="accountType"
-                        value="jointAccountType"
-                      />{" "}
-                      Joint
-                    </RadioLabel>
-                    <RadioLabel htmlFor="trustAccountType">
-                      <RadioInput
-                        type="radio"
-                        id="trustAccountType"
-                        name="accountType"
-                        value="trustAccountType"
-                      />{" "}
-                      In the name of a Trust
-                    </RadioLabel>
-                    <RadioLabel htmlFor="custodialAccountType">
-                      <RadioInput
-                        type="radio"
-                        id="custodialAccountType"
-                        name="accountType"
-                        value="custodialAccountType"
-                      />{" "}
-                      Custodial Account
-                    </RadioLabel>
-                    <Box ml="20px" my="20px" fontSize="15px">
-                      Your choice will apply to all the accounts you open during
-                      this session
-                    </Box>
-                  </Box>
+                  {createdAccounts.length == 0 && (
+                    <>
+                      <Box mt="10px" fontWeight="600">
+                        Select Account Type
+                      </Box>
+                      <Box
+                        onChange={accountTypeChange}
+                        d="flex"
+                        flexDir="column"
+                      >
+                        <RadioLabel htmlFor="individualAccountType">
+                          <RadioInput
+                            type="radio"
+                            id="individualAccountType"
+                            name="accountType"
+                            value="individualAccountType"
+                            defaultChecked
+                          />{" "}
+                          Individual
+                        </RadioLabel>
+                        <RadioLabel htmlFor="jointAccountType">
+                          <RadioInput
+                            type="radio"
+                            id="jointAccountType"
+                            name="accountType"
+                            value="jointAccountType"
+                          />{" "}
+                          Joint
+                        </RadioLabel>
+                        <RadioLabel htmlFor="trustAccountType">
+                          <RadioInput
+                            type="radio"
+                            id="trustAccountType"
+                            name="accountType"
+                            value="trustAccountType"
+                          />{" "}
+                          In the name of a Trust
+                        </RadioLabel>
+                        <RadioLabel htmlFor="custodialAccountType">
+                          <RadioInput
+                            type="radio"
+                            id="custodialAccountType"
+                            name="accountType"
+                            value="custodialAccountType"
+                          />{" "}
+                          Custodial Account
+                        </RadioLabel>
+                        <Box ml="20px" my="20px" fontSize="15px">
+                          Your choice will apply to all the accounts you open
+                          during this session
+                        </Box>
+                      </Box>
+                    </>
+                  )}
 
                   <Box mt="10px" fontWeight="600">
                     Account Type
@@ -259,11 +294,38 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                     </>
                   )}
                   <Box></Box>
-                  <ContinueButton type="submit">
-                    Add This Account
+                  <Box>
+                    {createdAccounts.map((account) => (
+                      <>
+                        <Box key={account.accountId}>
+                          {account.accountId} | {account.accountCategory} |{" "}
+                          {account.accountType} | {account.cdTerm} |{" "}
+                          {account.amount}
+                        </Box>
+                        <RemoveButton
+                          onClick={() => removeAccount(account.accountId)}
+                        >
+                          Remove
+                        </RemoveButton>
+                      </>
+                    ))}
+                  </Box>
+                  <Box></Box>
+                  <ContinueButton onClick={addAccount}>
+                    {createdAccounts.length > 0
+                      ? "Add Another Account"
+                      : "Add Account"}
                   </ContinueButton>
+                  {createdAccounts.length > 0 && (
+                    <>
+                      <Box></Box>
+                      <ContinueButton onClick={nextStep}>
+                        Continue
+                      </ContinueButton>
+                    </>
+                  )}
                 </Box>
-              </form>
+              </Box>
               {/* More information */}
             </Box>
           </Box>
