@@ -16,9 +16,11 @@ import Help from "src/help/Help";
 import About from "src/about/About";
 import ViewRates from "src/view-rates/ViewRates";
 import OpenAccount from "src/open-account/OpenAccount";
+import CreateAccounts from "src/open-account/CreateAccounts";
 
 import "./App.css";
 import Footer from "src/sharedComponents/Footer";
+import YourInformation from "src/open-account/YourInformation";
 
 function App() {
   return (
@@ -41,6 +43,12 @@ function App() {
             </Route>
             <Route path="/open-account" exact>
               <OpenAccount />
+            </Route>
+            <Route path="/open-account/create-accounts" exact>
+              <CreateAccounts />
+            </Route>
+            <Route path="/open-account/your-information" exact>
+              <YourInformation />
             </Route>
             <Route path="/bank/savings" exact></Route>
             <Route path="/bank/checking" exact></Route>

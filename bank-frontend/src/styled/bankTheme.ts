@@ -6,6 +6,7 @@ export const lightTheme1 = {
     ...theme.colors,
 
     GrayBackground: "#efefef",
+    LightGrayBackground: "#fbfbfb",
     Background: "#fffffe",
     BackgroundHover: "#f3f3f3",
     Headline: "#0d0d0d",
