@@ -1,13 +1,17 @@
 {
-  "lastRun": "1600578801565-accounts.js",
+  "lastRun": "1604248813436-personal-information.js",
   "migrations": [
     {
       "title": "1600578710516-users.js",
-      "timestamp": 1600581190810
+      "timestamp": 1604255362498
     },
     {
       "title": "1600578801565-accounts.js",
-      "timestamp": 1600581190819
+      "timestamp": 1604255362503
+    },
+    {
+      "title": "1604248813436-personal-information.js",
+      "timestamp": 1604255362510
     }
   ]
 }

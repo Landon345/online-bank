@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { Box, Select } from "@chakra-ui/core";
 import { useRecoilState } from "recoil";

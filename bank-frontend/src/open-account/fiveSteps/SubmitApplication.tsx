@@ -29,7 +29,11 @@ import {
   createdAccountsState,
   personalInformationState,
 } from "src/recoil/atoms";
-import { Register } from "src/api/register/Register";
+import {
+  RegisterUser,
+  RegisterPersonalInfo,
+  RegisterAccounts,
+} from "src/api/register/Register";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string()
@@ -248,13 +252,28 @@ const SubmitApplication: React.FC<SubmitApplicationProps> = ({
                   username: values.username,
                   password: values.password,
                 };
+                // try to create login username and password, if fails, probably a repeat username, make a different username
+                // once username created, pass username to the other register requests.
+                const loginResponse = await RegisterUser(accountLogin);
+                console.log("login response", loginResponse);
 
-                const response = await Register(
-                  accountLogin,
-                  createdAccounts,
-                  personalInformation
-                );
-                console.log("Full registered response", response);
+                if (loginResponse.success) {
+                  const personalInfoResponse = await RegisterPersonalInfo({
+                    ...personalInformation,
+                    username: loginResponse.data.username,
+                  });
+
+                  const newCreatedAccounts = createdAccounts.map((account) => {
+                    return {
+                      ...account,
+                      username: loginResponse.data.username,
+                    };
+                  });
+                  const accountsResponse = await RegisterAccounts(
+                    newCreatedAccounts
+                  );
+                }
+
                 //if the response contains 0 errors, then we move on.
                 history.push("/open-account/deposit-money");
                 setSubmitting(false);
