@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ThemeProvider } from "emotion-theming";
 import { Box } from "@chakra-ui/core";
+import { ThemeProvider } from "emotion-theming";
 import {
   lightTheme1,
   lightTheme2,
@@ -24,6 +24,7 @@ import Enroll from "src/open-account/fiveSteps/Enroll";
 import "./App.css";
 import Footer from "src/sharedComponents/Footer";
 import YourInformation from "src/open-account/fiveSteps/YourInformation";
+import Dashboard from "src/AuthorizedComponents/dashboard/Dashboard";
 
 function App() {
   return (
@@ -61,6 +62,9 @@ function App() {
             </Route>
             <Route path="/open-account/enroll" exact>
               <Enroll />
+            </Route>
+            <Route path="/dashboard" exact>
+              <Dashboard />
             </Route>
             <Route path="/bank/savings" exact></Route>
             <Route path="/bank/checking" exact></Route>

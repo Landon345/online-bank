@@ -50,4 +50,14 @@ const personalInformationState = atom({
   default: {} as personalInformation,
 });
 
-export { textState, createdAccountsState, personalInformationState };
+const sideLoginOpen = atom({
+  key: "sideLoginOpen",
+  default: false,
+});
+
+export {
+  textState,
+  createdAccountsState,
+  personalInformationState,
+  sideLoginOpen,
+};

@@ -3,12 +3,22 @@ import { Link } from "react-router-dom";
 import { Box, Button } from "@chakra-ui/core";
 import orion from "src/assets/orion.svg";
 import { DropDownButton } from "src/styled/StyledComponents";
+import Sidebar from "src/sharedComponents/Sidebar";
+import Login from "src/sharedComponents/Login";
+import { useRecoilState } from "recoil";
+import { sideLoginOpen } from "src/recoil/atoms";
 
 type NavbarProps = {};
 
 const Navbar: React.FC = ({}: NavbarProps) => {
+  const [loginOpen, setLoginOpen] = useRecoilState(sideLoginOpen);
   return (
     <>
+      {loginOpen && (
+        <Sidebar>
+          <Login />
+        </Sidebar>
+      )}
       <Box
         d="flex"
         justifyContent="space-between"
@@ -31,7 +41,9 @@ const Navbar: React.FC = ({}: NavbarProps) => {
           </Box>
           <Box mr="15px">Search</Box>
           <Box mr="15px">
-            <DropDownButton>Log In</DropDownButton>
+            <DropDownButton onClick={() => setLoginOpen(true)}>
+              Log In
+            </DropDownButton>
           </Box>
         </Box>
       </Box>
