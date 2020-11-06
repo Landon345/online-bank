@@ -33,7 +33,7 @@ import {
   RegisterUser,
   RegisterPersonalInfo,
   RegisterAccounts,
-} from "src/api/register/Register";
+} from "src/api/auth/Auth";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string()

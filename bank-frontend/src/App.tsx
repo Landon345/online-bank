@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LoggedInRoute from "src/AuthorizedComponents/protectedRoutes/LoggedInRoute";
 import { Box } from "@chakra-ui/core";
 import { ThemeProvider } from "emotion-theming";
 import {
@@ -63,9 +64,11 @@ function App() {
             <Route path="/open-account/enroll" exact>
               <Enroll />
             </Route>
-            <Route path="/dashboard" exact>
-              <Dashboard />
-            </Route>
+            <LoggedInRoute
+              path="/dashboard"
+              exact
+              component={Dashboard}
+            ></LoggedInRoute>
             <Route path="/bank/savings" exact></Route>
             <Route path="/bank/checking" exact></Route>
           </Switch>

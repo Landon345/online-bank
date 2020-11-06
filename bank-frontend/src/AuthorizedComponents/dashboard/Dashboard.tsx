@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 import {
@@ -16,25 +16,13 @@ type DashboardProps = {};
 const Dashboard: React.FC<DashboardProps> = ({ children }) => {
   const [loginOpen, setLoginOpen] = useRecoilState(sideLoginOpen);
 
+  useEffect(() => {
+    setLoginOpen(false);
+  }, []);
   return (
-    <Box
-      position="absolute"
-      top="0"
-      left="0"
-      height="100vh"
-      width="100vw"
-      display="flex"
-    >
-      <Box
-        flex={0.6}
-        opacity={0.7}
-        bg="Gray"
-        onClick={() => setLoginOpen(false)}
-      ></Box>
-      <Box flex={0.4} bg="White">
-        {children}
-      </Box>
-    </Box>
+    <>
+      <h1>The dashboard</h1>
+    </>
   );
 };
 

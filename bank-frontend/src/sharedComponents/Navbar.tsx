@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { Box, Button } from "@chakra-ui/core";
 import orion from "src/assets/orion.svg";
 import { DropDownButton } from "src/styled/StyledComponents";
@@ -7,11 +7,18 @@ import Sidebar from "src/sharedComponents/Sidebar";
 import Login from "src/sharedComponents/Login";
 import { useRecoilState } from "recoil";
 import { sideLoginOpen } from "src/recoil/atoms";
+import { SendLogout } from "src/api/auth/Auth";
 
 type NavbarProps = {};
+type TParams = {};
 
-const Navbar: React.FC = ({}: NavbarProps) => {
+const Navbar: React.FC = ({ history }: RouteComponentProps<TParams>) => {
   const [loginOpen, setLoginOpen] = useRecoilState(sideLoginOpen);
+  const Logout = async () => {
+    const response = await SendLogout();
+    localStorage.removeItem("api_key");
+    history.push("/");
+  };
   return (
     <>
       {loginOpen && (
@@ -41,9 +48,13 @@ const Navbar: React.FC = ({}: NavbarProps) => {
           </Box>
           <Box mr="15px">Search</Box>
           <Box mr="15px">
-            <DropDownButton onClick={() => setLoginOpen(true)}>
-              Log In
-            </DropDownButton>
+            {localStorage.getItem("api_key") ? (
+              <DropDownButton onClick={Logout}>Logout</DropDownButton>
+            ) : (
+              <DropDownButton onClick={() => setLoginOpen(true)}>
+                Log In
+              </DropDownButton>
+            )}
           </Box>
         </Box>
       </Box>
@@ -52,4 +63,4 @@ const Navbar: React.FC = ({}: NavbarProps) => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

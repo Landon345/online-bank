@@ -2,6 +2,7 @@ const db = require("./db-connection");
 
 const express = require("express");
 const AuthRoute = require("./routes/Auth");
+const BankAccountRoute = require("./routes/BankAccount");
 const path = require("path");
 
 const app = express();
@@ -33,6 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(AuthRoute);
+app.use(BankAccountRoute);
 
 app.listen(5000, () => {
   console.log("server started on port 5000");

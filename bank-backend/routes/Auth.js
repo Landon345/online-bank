@@ -1,6 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const db = require("../db-connection");
 const Router = express.Router();
+const { authenticateToken } = require("../middleware/AuthMiddleware");
+const jwt = require("jsonwebtoken");
 
 // Routes
 Router.get("/", async (req, res) => {
@@ -16,10 +19,14 @@ Router.get("/", async (req, res) => {
 Router.post("/register/logininfo", async (req, res) => {
   try {
     const { username, password } = req.body;
+    const user = { name: username };
+    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "1d",
+    });
     console.log("logininfo body :>> ", req.body);
     const results = await db.query(
-      `INSERT INTO users (username, password` +
-        `) values ('${username}', '${password}')`
+      `INSERT INTO users (username, password, api_key` +
+        `) values ('${username}', '${password}', '${accessToken})`
     );
     res.send({ success: true, data: req.body });
   } catch (e) {
@@ -107,21 +114,45 @@ Router.post("/register/personalinfo", async (req, res) => {
 });
 
 Router.post("/login", async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    console.log("logininfo body :>> ", req.body);
-    const results = await db.query(
-      `SELECT * FROM users where ` +
-        `username='${username}' and password='${password}'`
-    );
-    if (results.rows.length === 0) {
-      res.send({ success: false, data: "username or password incorrect" });
+  const { username, password } = req.body;
+  // Authenticate user
+  console.log("username and password :>> ", username);
+  const results = await db.query(
+    `SELECT * from users where username = '${username}' and password = '${password}'`
+  );
+  console.log("results from login", results.rows);
+  //create jsonwebtoken for the user
+  if (results.rows.length === 1) {
+    const username = results.rows[0].username;
+    const user = { name: username };
+    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "1d",
+    });
+    try {
+      await db.query(
+        `update users set api_key = '${accessToken}' where username = '${username}'`
+      );
+    } catch (e) {
+      console.log(e);
+      res.json({ success: false, data: { e } });
     }
-    res.send({ success: true, data: results.rows[0] });
-  } catch (e) {
-    console.log("logininfo error :>> ", e);
-    res.send({ success: false, data: e });
+    console.log("object :>> ", { name: username, api_key: accessToken });
+    res.json({
+      success: true,
+      data: { username: username, api_key: accessToken },
+    });
+  } else {
+    res.json({ success: false, data: "username or password incorrect" });
   }
+});
+Router.post("/logout", authenticateToken, async (req, res) => {
+  db.query(
+    `update users set api_key = null where username = '${req.username}'`
+  );
+  res.json({
+    success: true,
+    data: req.user.user,
+  });
 });
 
 module.exports = Router;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box } from "@chakra-ui/core";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { ContinueButton, TextInput, TextLabel } from "src/open-account/style";
-import { SendLogin } from "src/api/login/Login";
+import { SendLogin } from "src/api/auth/Auth";
 import { useRecoilState } from "recoil";
 import { personalInformationState, sideLoginOpen } from "src/recoil/atoms";
 
@@ -20,8 +20,8 @@ const Login: React.FC<LoginProps> = ({
   const login = async () => {
     const response = await SendLogin({ username, password });
     if (response.success) {
-      localStorage.removeItem("api_token");
-      localStorage.setItem("api_token", response.data.api_token);
+      localStorage.removeItem("api_key");
+      localStorage.setItem("api_key", response.data.api_key);
       history.push("/dashboard");
       setLoginOpen(false);
     } else {
@@ -38,6 +38,7 @@ const Login: React.FC<LoginProps> = ({
         <TextInput
           type="text"
           id="username"
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
 
@@ -45,6 +46,7 @@ const Login: React.FC<LoginProps> = ({
         <TextInput
           type="password"
           id="password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </Box>
