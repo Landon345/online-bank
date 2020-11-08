@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ThemeProvider } from "emotion-theming";
+import LoggedInRoute from "src/AuthorizedComponents/protectedRoutes/LoggedInRoute";
 import { Box } from "@chakra-ui/core";
+import { ThemeProvider } from "emotion-theming";
 import {
   lightTheme1,
   lightTheme2,
@@ -16,11 +17,15 @@ import Help from "src/help/Help";
 import About from "src/about/About";
 import ViewRates from "src/view-rates/ViewRates";
 import OpenAccount from "src/open-account/OpenAccount";
-import CreateAccounts from "src/open-account/CreateAccounts";
+import CreateAccounts from "src/open-account/fiveSteps/CreateAccounts";
+import SubmitApplication from "src/open-account/fiveSteps/SubmitApplication";
+import DepositMoney from "src/open-account/fiveSteps/DepositMoney";
+import Enroll from "src/open-account/fiveSteps/Enroll";
 
 import "./App.css";
 import Footer from "src/sharedComponents/Footer";
-import YourInformation from "src/open-account/YourInformation";
+import YourInformation from "src/open-account/fiveSteps/YourInformation";
+import Dashboard from "src/AuthorizedComponents/dashboard/Dashboard";
 
 function App() {
   return (
@@ -50,6 +55,20 @@ function App() {
             <Route path="/open-account/your-information" exact>
               <YourInformation />
             </Route>
+            <Route path="/open-account/submit-application" exact>
+              <SubmitApplication />
+            </Route>
+            <Route path="/open-account/deposit-money" exact>
+              <DepositMoney />
+            </Route>
+            <Route path="/open-account/enroll" exact>
+              <Enroll />
+            </Route>
+            <LoggedInRoute
+              path="/dashboard"
+              exact
+              component={Dashboard}
+            ></LoggedInRoute>
             <Route path="/bank/savings" exact></Route>
             <Route path="/bank/checking" exact></Route>
           </Switch>

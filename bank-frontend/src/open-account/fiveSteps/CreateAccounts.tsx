@@ -1,8 +1,8 @@
-import React, { useState, FormEvent, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { Box, Select } from "@chakra-ui/core";
 import { useRecoilState } from "recoil";
-import { textState, createdAccountsState } from "src/recoil/atoms";
+import { createdAccountsState } from "src/recoil/atoms";
 import {
   RadioInput,
   RadioLabel,
@@ -17,6 +17,7 @@ import AccountStep from "src/open-account/AccountStep";
 import {
   accountTypeOnlyMapping,
   accountTermOnlyMapping,
+  accountIRATermOnlyMapping,
 } from "src/data/MappingData";
 import * as faqs from "src/data/FAQsData";
 import FAQs from "src/open-account/FAQs";
@@ -28,7 +29,6 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
   history,
 }: RouteComponentProps<TParams>) => {
   const [accountId, setAccountId] = useState(1);
-  const [text, setText] = useRecoilState(textState);
   const [accountType, setAccountType] = useState("individualAccountType");
   const [cdTerm, setCDTerm] = useState(
     localStorage.getItem("accountpreset") || ""
@@ -37,6 +37,12 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
   const [accountCategory, setAccountCategory] = useState(
     accountTypeOnlyMapping[localStorage.getItem("accountpreset") || ""] || "sav"
   );
+  const [IRAType, setIRAType] = useState(
+    localStorage.getItem("accountpreset")?.split("-")[0] == "IRAOSA"
+      ? "IRAOSA"
+      : "IRACD" || "IRACD"
+  );
+  const [IRAPlan, setIRAPlan] = useState("Traditional");
 
   const [debit, setDebit] = useState(false);
   const [checks, setChecks] = useState(false);
@@ -51,6 +57,9 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
   };
   const accountCategoryChange = (e) => {
     setAccountCategory(e.target.value);
+  };
+  const IRAPlanChange = (e) => {
+    setIRAPlan(e.target.value);
   };
 
   const showAmount = () => {
@@ -206,6 +215,16 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                       />{" "}
                       Interest Checking
                     </RadioLabel>
+                    <RadioLabel htmlFor="IRAAccountCategory">
+                      <RadioInput
+                        type="radio"
+                        id="IRAAccountCategory"
+                        name="AccountCategory"
+                        value="IRA"
+                        defaultChecked={accountCategory == "IRA"}
+                      />{" "}
+                      IRA
+                    </RadioLabel>
                   </Box>
                   {accountCategory == "CD" && (
                     <>
@@ -220,6 +239,79 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                         {Object.keys(accountTermOnlyMapping).map((term) => (
                           <option value={term} key={term}>
                             {accountTermOnlyMapping[term]}
+                          </option>
+                        ))}
+                      </Select>
+                    </>
+                  )}
+                  {accountCategory == "IRA" && (
+                    <>
+                      <Box mt="10px" fontWeight="600">
+                        IRA Plan
+                      </Box>
+                      <Box onChange={IRAPlanChange} d="flex" flexDir="column">
+                        <RadioLabel htmlFor="IRAPlan">
+                          <RadioInput
+                            type="radio"
+                            id="IRAPlan"
+                            name="IRAPlan"
+                            value="Traditional"
+                            defaultChecked={IRAPlan == "Traditional"}
+                          />{" "}
+                          Traditional
+                        </RadioLabel>
+                        <RadioLabel htmlFor="IRAPlan">
+                          <RadioInput
+                            type="radio"
+                            id="IRAPlan"
+                            name="IRAPlan"
+                            value="Roth"
+                            defaultChecked={IRAPlan == "Roth"}
+                          />{" "}
+                          Roth
+                        </RadioLabel>
+                        <RadioLabel htmlFor="IRAPlan">
+                          <RadioInput
+                            type="radio"
+                            id="IRAPlan"
+                            name="IRAPlan"
+                            value="SEP"
+                            defaultChecked={IRAPlan == "SEP"}
+                          />{" "}
+                          SEP
+                        </RadioLabel>
+                      </Box>
+                    </>
+                  )}
+                  {accountCategory == "IRA" && (
+                    <>
+                      <Box mt="10px" fontWeight="600">
+                        Type
+                      </Box>
+                      <Select
+                        value={IRAType}
+                        onChange={(e) => setIRAType(e.target.value)}
+                      >
+                        <option value={"IRAOSA"}>IRA Online Savings</option>
+                        <option value={"IRACD"}>
+                          IRA Certificate of Deposit (CDs)
+                        </option>
+                      </Select>
+                    </>
+                  )}
+                  {accountCategory == "IRA" && IRAType !== "IRAOSA" && (
+                    <>
+                      <Box mt="10px" fontWeight="600">
+                        Term
+                      </Box>
+                      <Select
+                        value={cdTerm}
+                        onChange={(e) => setCDTerm(e.target.value)}
+                      >
+                        <option value="">Select</option>
+                        {Object.keys(accountIRATermOnlyMapping).map((term) => (
+                          <option value={term} key={term}>
+                            {accountIRATermOnlyMapping[term]}
                           </option>
                         ))}
                       </Select>

@@ -1,6 +1,11 @@
-const express = require("express");
-const app = express();
 const db = require("./db-connection");
+
+const express = require("express");
+const AuthRoute = require("./routes/Auth");
+const BankAccountRoute = require("./routes/BankAccount");
+const path = require("path");
+
+const app = express();
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -25,20 +30,12 @@ const options = {
 };
 
 app.use(express.static("public", options));
-const router = express.Router([options]);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "..", "build")));
+app.use(AuthRoute);
+app.use(BankAccountRoute);
 
-// Routes
-
-app.get("/", async (req, res) => {
-  //   res.send("server on online bank");
-  try {
-    const results = await db.query("select * from users");
-    res.send(results.rows);
-  } catch (e) {
-    res.send(e);
-  }
+app.listen(5000, () => {
+  console.log("server started on port 5000");
 });
-
-app.listen(5000, () => console.log("listening on port 5000...."));

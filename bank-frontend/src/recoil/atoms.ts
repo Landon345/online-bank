@@ -14,13 +14,50 @@ type account = {
   checks: boolean;
   transfers: boolean;
 };
-type accountAtom = {
-  key: string;
-  default: account[];
-};
 const createdAccountsState = atom({
   key: "createdAccountsState",
   default: [] as account[],
 });
 
-export { textState, createdAccountsState };
+type personalInformation = {
+  firstname: string;
+
+  lastname: string;
+  middleInitial: string;
+  suffix: string;
+  birthDate: string;
+  socialSecurity: string;
+  maidenName: string;
+  occupation: string;
+
+  email: string;
+  personalPhone: string;
+  workPhone: string;
+  ext: string;
+
+  address: string;
+  addressLineTwo: string;
+  city: string;
+  state: string;
+  zip: string;
+
+  mailingAddress: string;
+  previousAddress: string;
+};
+
+const personalInformationState = atom({
+  key: "personalInformationState",
+  default: {} as personalInformation,
+});
+
+const sideLoginOpen = atom({
+  key: "sideLoginOpen",
+  default: false,
+});
+
+export {
+  textState,
+  createdAccountsState,
+  personalInformationState,
+  sideLoginOpen,
+};
