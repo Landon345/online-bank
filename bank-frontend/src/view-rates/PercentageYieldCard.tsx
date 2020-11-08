@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button } from "@chakra-ui/core";
 import { OpenAccountButton } from "src/styled/StyledComponents";
+import { Icon } from "@chakra-ui/core";
 
 type Term = {
   time: string;
@@ -12,6 +13,7 @@ type PercentageYieldCardProps = {
   title: string;
   availableYields?: Array<Term>;
   percentageYield?: string;
+  bestfor: string;
   details: Array<string>;
   buttonLink: string;
 };
@@ -20,6 +22,7 @@ const PercentageYieldCard: React.FC<PercentageYieldCardProps> = ({
   title,
   availableYields,
   percentageYield,
+  bestfor,
   details,
   buttonLink,
 }) => {
@@ -43,6 +46,14 @@ const PercentageYieldCard: React.FC<PercentageYieldCardProps> = ({
       <Box>
         <Box my="20px" fontSize="20px" fontWeight="700">
           {title}
+        </Box>
+        <Box border="1px solid gray" bg="gray.50" p="20px" d="flex">
+          <Box mr="10px">
+            <Icon name="check-circle" color="teal.500" size="26px" />
+          </Box>
+          <Box>
+            <strong>Best for:</strong> {bestfor}
+          </Box>
         </Box>
         <Box mt="20px">
           {availableYields && (
@@ -99,7 +110,7 @@ const PercentageYieldCard: React.FC<PercentageYieldCardProps> = ({
           </ul>
         </Box>
       </Box>
-      <Box>
+      <Box d="flex" justifyContent="center">
         <Link to={availableYields ? buttonLink + term.mos : buttonLink}>
           <OpenAccountButton>Open Account</OpenAccountButton>
         </Link>

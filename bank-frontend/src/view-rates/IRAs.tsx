@@ -3,21 +3,20 @@ import { Link } from "react-router-dom";
 import { Box, Button } from "@chakra-ui/core";
 import PercentageYieldCard from "src/view-rates/PercentageYieldCard";
 
-type CDsProps = {};
+type IRAsProps = {};
 
-const CDs: React.FC<CDsProps> = ({}) => {
+const IRAs: React.FC<IRAsProps> = ({}) => {
   return (
     <Box color="Headline" p="30px">
-      <Box fontSize="25px">CDs</Box>
-      <Box py="20px">Open any Orion Bank CD and enjoy the benefits of: </Box>
-      <ul>
-        <li>All Ten Day Best Rate Guarantee</li>
-        <li>Interest compounded daily</li>
-        <li>Automatic renewal at maturity</li>
-      </ul>
+      <Box fontSize="25px">IRAs</Box>
+      <Box py="20px">
+        Roth, SEP, or Traditional IRA options are available for all IRA
+        products.
+      </Box>
+
       <Box d="grid" gridTemplateColumns="repeat(auto-fit, minmax(320px, 1fr))">
         <PercentageYieldCard
-          title="High Yield CD"
+          title="IRA High Yield CD"
           availableYields={[
             { time: "3 mo", rate: "0.20%", mos: 3 },
             { time: "6 mo", rate: "0.40%", mos: 6 },
@@ -29,36 +28,41 @@ const CDs: React.FC<CDsProps> = ({}) => {
           ]}
           details={[
             "Maximum savings with a fixed rate",
+            "Your deposits are insured by the FDIC up to the maximum allowed by law",
             "Early withdrawal penalty will apply",
           ]}
-          buttonLink="/open-account?OAP=CD-"
-          bestfor="Earning a higher interest rate when you lock in your funds for a longer term."
+          buttonLink="/open-account?OAP=IRAHY-"
+          bestfor="Maximum savings at a fixed rate when you lock in funds for the term length."
         />
         <PercentageYieldCard
-          title="Raise Your Rate CD"
+          title="IRA Raise Your Rate CD"
           availableYields={[
             { time: "2 yr", rate: "0.70%", mos: 24 },
             { time: "4 yr", rate: "0.70%", mos: 48 },
           ]}
           details={[
             "Start with a great rate, plus have the opportunity to increase your rate once over the 2-year term or twice over the 4-year term if our rate for your term and balance tier goes up",
+            "Your deposits are insured by the FDIC up to the maximum allowed by law",
             "Early withdrawal penalty will apply",
           ]}
-          buttonLink="/open-account?OAP=CDRYR-"
-          bestfor="Earning interest with the flexibility to raise your CD rate. If our CD rate goes up, yours can too."
+          buttonLink="/open-account?OAP=IRARYRCD-"
+          bestfor="Retirement savings with the ability to raise your CD rate."
         />
         <PercentageYieldCard
-          title="No Penalty CD"
+          title="IRA Online Savings"
           percentageYield="0.60%"
           details={[
-            "You can withdraw all your money any time after the first six days following the date you funded the account, and keep the interest earned with no penalties",
+            "Six withdrawals limit per statement cycle.",
+            "Rate is variable and may change after the account is opened",
+            "Your deposits are insured by the FDIC up to the maximum allowed by law",
+            "Fees may reduce earnings",
           ]}
-          buttonLink="/open-account?OAP=NCD-11"
-          bestfor="An established fund you may need to access soon after opening."
+          buttonLink="/open-account?OAP=IRAOSA-0"
+          bestfor="Building your IRA over time with unlimited deposits up to your annual contribution limits."
         />
       </Box>
     </Box>
   );
 };
 
-export default CDs;
+export default IRAs;

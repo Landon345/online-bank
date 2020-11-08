@@ -10,6 +10,7 @@ import {
   TextInput,
   TextLabel,
 } from "src/open-account/style";
+import Login from "src/sharedComponents/Login";
 import "react-tabs/style/react-tabs.css";
 import FAQs from "src/open-account/FAQs";
 import HomeNavbar from "src/sharedComponents/HomeNavbar";
@@ -31,14 +32,11 @@ const OpenAccount: React.FC = ({
     location.search ? location.search.split("=")[1] : ""
   );
   const [existing, setExisting] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
   useEffect(() => {
     localStorage.removeItem("accountpreset");
   }, []);
 
-  const Login = () => {};
   const goToCreateAccounts = () => {
     localStorage.setItem("accountpreset", location.search.split("=")[1]);
     history.push("/open-account/create-accounts");
@@ -130,25 +128,7 @@ const OpenAccount: React.FC = ({
               )}
               {existing === "existing" && (
                 <Box w="50%" ml="45px">
-                  <Box d="grid" gridTemplateColumns="1fr 1fr">
-                    <TextLabel htmlFor="username">Username</TextLabel>
-                    <TextInput
-                      type="text"
-                      id="username"
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-
-                    <TextLabel htmlFor="password">Password</TextLabel>
-                    <TextInput
-                      type="password"
-                      id="password"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </Box>
-                  <Box p="10px">
-                    Forgot <Link>username</Link> or <Link>password</Link>?
-                  </Box>
-                  <ContinueButton onClick={Login}>Log In</ContinueButton>
+                  <Login />
                 </Box>
               )}
             </Box>

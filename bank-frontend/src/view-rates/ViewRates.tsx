@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import "react-tabs/style/react-tabs.css";
 import HomeNavbar from "src/sharedComponents/HomeNavbar";
 import CDs from "src/view-rates/CDs";
+import Checking from "src/view-rates/Checking";
+import Savings from "src/view-rates/Savings";
+import IRAs from "src/view-rates/IRAs";
 
 type ViewRatesProps = {};
 
@@ -12,7 +15,7 @@ const ViewRates: React.FC<ViewRatesProps> = ({}) => {
   return (
     <Box>
       <HomeNavbar />
-      <Box bg="GrayBackground" w="100%">
+      <Box bg="GrayBackground" w="100%" pb="80px">
         <Box
           bg="GrayBackground"
           maxW="1300px"
@@ -54,7 +57,7 @@ const ViewRates: React.FC<ViewRatesProps> = ({}) => {
           </Box>
           <Box my="20px">
             Annual Percentage Yeilds (APYs) displayed are accurate as of
-            10/04/2020
+            11/08/2020
           </Box>
           <Box my="20px">
             <Link>Not sure where to start?</Link>
@@ -103,13 +106,13 @@ const ViewRates: React.FC<ViewRatesProps> = ({}) => {
               <CDs />
             </TabPanel>
             <TabPanel className="tab-panel">
-              <h2>Any content 2</h2>
+              <Savings />
             </TabPanel>
             <TabPanel className="tab-panel">
-              <h2>Any content 3</h2>
+              <Checking />
             </TabPanel>
             <TabPanel className="tab-panel">
-              <h2>Any content 4</h2>
+              <IRAs />
             </TabPanel>
           </Tabs>
         </Box>
