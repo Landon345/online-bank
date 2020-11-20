@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Box, Icon } from "@chakra-ui/core";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { Box } from "@chakra-ui/core";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
   accountTermOnlyMapping,
   accountRateMapping,
@@ -15,13 +14,10 @@ import {
   TextLabel,
   InfoLabel,
   InfoPoint,
-  CustomForm,
 } from "src/open-account/style";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import "react-tabs/style/react-tabs.css";
-import HomeNavbar from "src/sharedComponents/HomeNavbar";
-import CDs from "src/view-rates/CDs";
 import { useRecoilState } from "recoil";
 import Error, { checkError } from "src/open-account/fiveSteps/Error";
 import AccountStep from "src/open-account/AccountStep";
@@ -63,45 +59,43 @@ const SubmitApplication: React.FC<SubmitApplicationProps> = ({
   const [personalInformation, setPersonalInformation] = useRecoilState(
     personalInformationState
   );
-  //   const [createdAccounts, setCreatedAccounts] = useRecoilState(
-  //     createdAccountsState
-  //   );
-  const [createdAccounts, setCreatedAccounts] = useState([
-    {
-      accountId: 1,
-      accountType: "individualAccountType",
-      accountCategory: "CD",
-      cdTerm: "CD-3",
-      amount: 0,
-      debit: false,
-      checks: false,
-      transfers: false,
-    },
-    {
-      accountId: 2,
-      accountType: "individualAccountType",
-      accountCategory: "CD",
-      cdTerm: "CD-3",
-      amount: 0,
-      debit: false,
-      checks: false,
-      transfers: false,
-    },
-    {
-      accountId: 3,
-      accountType: "individualAccountType",
-      accountCategory: "CD",
-      cdTerm: "CD-3",
-      amount: 0,
-      debit: false,
-      checks: false,
-      transfers: false,
-    },
-  ]);
+  const [createdAccounts, setCreatedAccounts] = useRecoilState(
+    createdAccountsState
+  );
+  // const [createdAccounts, setCreatedAccounts] = useState([
+  //   {
+  //     accountId: 1,
+  //     accountType: "individualAccountType",
+  //     accountCategory: "CD",
+  //     cdTerm: "CD-3",
+  //     amount: 0,
+  //     debit: false,
+  //     checks: false,
+  //     transfers: false,
+  //   },
+  //   {
+  //     accountId: 2,
+  //     accountType: "individualAccountType",
+  //     accountCategory: "CD",
+  //     cdTerm: "CD-3",
+  //     amount: 0,
+  //     debit: false,
+  //     checks: false,
+  //     transfers: false,
+  //   },
+  //   {
+  //     accountId: 3,
+  //     accountType: "individualAccountType",
+  //     accountCategory: "CD",
+  //     cdTerm: "CD-3",
+  //     amount: 0,
+  //     debit: false,
+  //     checks: false,
+  //     transfers: false,
+  //   },
+  // ]);
 
   const [verified, setVerified] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (createdAccounts.length == 0) {
@@ -320,7 +314,7 @@ const SubmitApplication: React.FC<SubmitApplicationProps> = ({
                     </Box>
                     <Box flex={0.6}>
                       <TextInput
-                        type="text"
+                        type="password"
                         name="password"
                         id="password"
                         onChange={handleChange}
@@ -340,7 +334,7 @@ const SubmitApplication: React.FC<SubmitApplicationProps> = ({
                     </Box>
                     <Box flex={0.6}>
                       <TextInput
-                        type="text"
+                        type="password"
                         name="passwordConfirmation"
                         id="passwordConfirmation"
                         onChange={handleChange}

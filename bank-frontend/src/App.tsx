@@ -26,6 +26,7 @@ import "./App.css";
 import Footer from "src/sharedComponents/Footer";
 import YourInformation from "src/open-account/fiveSteps/YourInformation";
 import Dashboard from "src/AuthorizedComponents/dashboard/Dashboard";
+import Transactions from "src/AuthorizedComponents/dashboard/Transactions";
 
 function App() {
   return (
@@ -64,11 +65,12 @@ function App() {
             <Route path="/open-account/enroll" exact>
               <Enroll />
             </Route>
-            <LoggedInRoute
-              path="/dashboard"
-              exact
-              component={Dashboard}
-            ></LoggedInRoute>
+            <LoggedInRoute path="/dashboard" exact>
+              <Dashboard />
+            </LoggedInRoute>
+            <LoggedInRoute path="/account/:accountid" exact>
+              <Transactions />
+            </LoggedInRoute>
             <Route path="/bank/savings" exact></Route>
             <Route path="/bank/checking" exact></Route>
           </Switch>

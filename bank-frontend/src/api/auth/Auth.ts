@@ -20,7 +20,7 @@ export async function SendLogin(credentials) {
 }
 
 export async function SendLogout() {
-  console.log("api_key", localStorage.getItem("api_key"));
+  console.log("api_key", sessionStorage.getItem("api_key"));
   const Response = await fetch(`${API_BASE_URL}/logout`, {
     method: "POST",
     mode: "cors", // no-cors, *cors, same-origin
@@ -29,7 +29,7 @@ export async function SendLogout() {
     headers: {
       "content-type": "application/json",
       accept: "application/json",
-      authorization: `Bearer ${localStorage.getItem("api_key")}`,
+      authorization: `Bearer ${sessionStorage.getItem("api_key")}`,
     },
     redirect: "follow", // manual, *follow, error
     referrerPolicy: "no-referrer", // no-referrer, *client

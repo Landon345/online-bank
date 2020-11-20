@@ -119,44 +119,44 @@ const YourInformation: React.FC<YourInformationProps> = ({
 }: RouteComponentProps<TParams>) => {
   const [continued, setContinued] = useState(false);
   const [citizen, setCitizen] = useState(false);
-  // const [createdAccounts, setCreatedAccounts] = useRecoilState(
-  //   createdAccountsState
-  // );
+  const [createdAccounts, setCreatedAccounts] = useRecoilState(
+    createdAccountsState
+  );
   const [personalInformation, setPersonalInformation] = useRecoilState(
     personalInformationState
   );
-  const [createdAccounts, setCreatedAccounts] = useState([
-    {
-      accountId: 1,
-      accountType: "individualAccountType",
-      accountCategory: "CD",
-      cdTerm: "CD-3",
-      amount: 0,
-      debit: false,
-      checks: false,
-      transfers: false,
-    },
-    {
-      accountId: 2,
-      accountType: "individualAccountType",
-      accountCategory: "CD",
-      cdTerm: "CD-3",
-      amount: 0,
-      debit: false,
-      checks: false,
-      transfers: false,
-    },
-    {
-      accountId: 3,
-      accountType: "individualAccountType",
-      accountCategory: "CD",
-      cdTerm: "CD-3",
-      amount: 0,
-      debit: false,
-      checks: false,
-      transfers: false,
-    },
-  ]);
+  // const [createdAccounts, setCreatedAccounts] = useState([
+  //   {
+  //     accountId: 1,
+  //     accountType: "individualAccountType",
+  //     accountCategory: "CD",
+  //     cdTerm: "CD-3",
+  //     amount: 0,
+  //     debit: false,
+  //     checks: false,
+  //     transfers: false,
+  //   },
+  //   {
+  //     accountId: 2,
+  //     accountType: "individualAccountType",
+  //     accountCategory: "CD",
+  //     cdTerm: "CD-3",
+  //     amount: 0,
+  //     debit: false,
+  //     checks: false,
+  //     transfers: false,
+  //   },
+  //   {
+  //     accountId: 3,
+  //     accountType: "individualAccountType",
+  //     accountCategory: "CD",
+  //     cdTerm: "CD-3",
+  //     amount: 0,
+  //     debit: false,
+  //     checks: false,
+  //     transfers: false,
+  //   },
+  // ]);
 
   useEffect(() => {
     if (createdAccounts.length == 0) {
@@ -164,21 +164,42 @@ const YourInformation: React.FC<YourInformationProps> = ({
     }
   }, []);
 
-  const goToSubmitApplication = () => {};
-
   const initialValues: InfoFormValues = {
-    firstname: "Landon",
+    // firstname: "Landon",
 
-    lastname: "Schlangen",
+    // lastname: "Schlangen",
+    // middleInitial: "",
+    // suffix: "",
+    // birthDate: "08/06/1999",
+    // socialSecurity: "123-23-8643",
+    // maidenName: "Stommes",
+    // occupation: "tech",
+
+    // email: "lschlangen5@gmail.com",
+    // personalPhone: "320-260-4994",
+    // workPhone: "",
+    // ext: "",
+
+    // address: "",
+    // addressLineTwo: "",
+    // city: "",
+    // state: "",
+    // zip: "",
+
+    // mailingAddress: "true",
+    // previousAddress: "true",
+    firstname: "",
+
+    lastname: "",
     middleInitial: "",
     suffix: "",
-    birthDate: "08/06/1999",
-    socialSecurity: "123-23-8643",
-    maidenName: "Stommes",
-    occupation: "tech",
+    birthDate: "",
+    socialSecurity: "",
+    maidenName: "",
+    occupation: "",
 
-    email: "lschlangen5@gmail.com",
-    personalPhone: "320-260-4994",
+    email: "",
+    personalPhone: "",
     workPhone: "",
     ext: "",
 
@@ -188,8 +209,8 @@ const YourInformation: React.FC<YourInformationProps> = ({
     state: "",
     zip: "",
 
-    mailingAddress: "true",
-    previousAddress: "true",
+    mailingAddress: "",
+    previousAddress: "",
   };
   return (
     <Box margin="auto" bg="GrayBackground" minH="100vh">
@@ -753,23 +774,16 @@ const YourInformation: React.FC<YourInformationProps> = ({
                   Account{createdAccounts.length > 1 && "s"} you're opening:
                 </Box>
                 <hr />
-                {/* <pre>{JSON.stringify(createdAccounts, null, 2)}</pre> */}
                 <Box>
                   {createdAccounts.map((account) => (
                     <Box key={account.accountId} mb="20px">
-                      {account.accountCategory == "CD" ? (
-                        <>
-                          <Box fontSize="20px" fontStyle="bold" py="10px">
-                            {accountTermOnlyMapping[account.cdTerm]}
-                          </Box>
-
-                          {accountRateMapping[account.cdTerm]}
-                        </>
-                      ) : (
+                      <Box>
                         <Box fontSize="20px" fontStyle="bold" py="10px">
-                          {account.accountCategory}
+                          {accountTermOnlyMapping[account.cdTerm]}
                         </Box>
-                      )}
+
+                        {accountRateMapping[account.cdTerm]}
+                      </Box>
                     </Box>
                   ))}
                 </Box>

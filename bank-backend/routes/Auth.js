@@ -26,7 +26,7 @@ Router.post("/register/logininfo", async (req, res) => {
     console.log("logininfo body :>> ", req.body);
     const results = await db.query(
       `INSERT INTO users (username, password, api_key` +
-        `) values ('${username}', '${password}', '${accessToken})`
+        `) values ('${username}', '${password}', '${accessToken}')`
     );
     res.send({ success: true, data: req.body });
   } catch (e) {

@@ -34,11 +34,11 @@ const OpenAccount: React.FC = ({
   const [existing, setExisting] = useState("");
 
   useEffect(() => {
-    localStorage.removeItem("accountpreset");
+    sessionStorage.removeItem("accountpreset");
   }, []);
 
   const goToCreateAccounts = () => {
-    localStorage.setItem("accountpreset", location.search.split("=")[1]);
+    sessionStorage.setItem("accountpreset", location.search.split("=")[1]);
     history.push("/open-account/create-accounts");
   };
   const radioButtonChange = (e) => {

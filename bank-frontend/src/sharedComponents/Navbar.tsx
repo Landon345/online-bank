@@ -16,7 +16,7 @@ const Navbar: React.FC = ({ history }: RouteComponentProps<TParams>) => {
   const [loginOpen, setLoginOpen] = useRecoilState(sideLoginOpen);
   const Logout = async () => {
     const response = await SendLogout();
-    localStorage.removeItem("api_key");
+    sessionStorage.removeItem("api_key");
     history.push("/");
   };
   return (
@@ -48,7 +48,7 @@ const Navbar: React.FC = ({ history }: RouteComponentProps<TParams>) => {
           </Box>
           <Box mr="15px">Search</Box>
           <Box mr="15px">
-            {localStorage.getItem("api_key") ? (
+            {sessionStorage.getItem("api_key") ? (
               <DropDownButton onClick={Logout}>Logout</DropDownButton>
             ) : (
               <DropDownButton onClick={() => setLoginOpen(true)}>

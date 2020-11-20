@@ -55,9 +55,15 @@ const sideLoginOpen = atom({
   default: false,
 });
 
+const accounts = atom({
+  key: "accounts",
+  default: [] as any,
+});
+
 export {
   textState,
   createdAccountsState,
   personalInformationState,
   sideLoginOpen,
+  accounts,
 };

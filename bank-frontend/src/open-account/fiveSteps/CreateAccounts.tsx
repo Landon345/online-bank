@@ -16,8 +16,10 @@ import {
 import AccountStep from "src/open-account/AccountStep";
 import {
   accountTypeOnlyMapping,
+  accountTypeMapping,
   accountTermOnlyMapping,
   accountIRATermOnlyMapping,
+  accountRateMapping,
 } from "src/data/MappingData";
 import * as faqs from "src/data/FAQsData";
 import FAQs from "src/open-account/FAQs";
@@ -31,14 +33,15 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
   const [accountId, setAccountId] = useState(1);
   const [accountType, setAccountType] = useState("individualAccountType");
   const [cdTerm, setCDTerm] = useState(
-    localStorage.getItem("accountpreset") || ""
+    sessionStorage.getItem("accountpreset") || ""
   );
   const [amount, setAmount] = useState(0);
   const [accountCategory, setAccountCategory] = useState(
-    accountTypeOnlyMapping[localStorage.getItem("accountpreset") || ""] || "sav"
+    accountTypeOnlyMapping[sessionStorage.getItem("accountpreset") || ""] ||
+      "sav"
   );
   const [IRAType, setIRAType] = useState(
-    localStorage.getItem("accountpreset")?.split("-")[0] == "IRAOSA"
+    sessionStorage.getItem("accountpreset")?.split("-")[0] == "IRAOSA"
       ? "IRAOSA"
       : "IRACD" || "IRACD"
   );
@@ -56,7 +59,22 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
     setAccountType(e.target.value);
   };
   const accountCategoryChange = (e) => {
-    setAccountCategory(e.target.value);
+    const value = e.target.value;
+    setAccountCategory(value);
+    //   "OSAV-0": "Online Savings Account",
+    // "DDA-0": "Interest Checking",
+    // "MMDA-0": "Money Market Savings",
+    if (value !== "CD") {
+      if (value == "mm") {
+        setCDTerm("MMDA-0");
+      } else if (value == "check") {
+        setCDTerm("DDA-0");
+      } else if (value == "sav") {
+        setCDTerm("OSAV-0");
+      } else {
+        setCDTerm("");
+      }
+    }
   };
   const IRAPlanChange = (e) => {
     setIRAPlan(e.target.value);
@@ -84,7 +102,6 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
     setAccountId((prev) => prev + 1);
     // reset
     setAmount(0);
-    setCDTerm("");
   };
   const removeAccount = (id) => {
     setCreatedAccounts((prev) =>
@@ -386,37 +403,46 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                     </>
                   )}
                   <Box></Box>
-                  <Box>
-                    {createdAccounts.map((account) => (
-                      <>
-                        <Box key={account.accountId}>
-                          {account.accountId} | {account.accountCategory} |{" "}
-                          {account.accountType} | {account.cdTerm} |{" "}
-                          {account.amount}
-                        </Box>
-                        <RemoveButton
-                          onClick={() => removeAccount(account.accountId)}
-                        >
-                          Remove
-                        </RemoveButton>
-                      </>
-                    ))}
-                  </Box>
-                  <Box></Box>
-                  <ContinueButton onClick={addAccount}>
-                    {createdAccounts.length > 0
-                      ? "Add Another Account"
-                      : "Add Account"}
-                  </ContinueButton>
-                  {createdAccounts.length > 0 && (
-                    <>
-                      <Box></Box>
-                      <ContinueButton onClick={nextStep}>
-                        Continue
-                      </ContinueButton>
-                    </>
-                  )}
                 </Box>
+                <Box>
+                  {createdAccounts.length > 0 && (
+                    <Box fontSize="22px" fontWeight="700" mb="5px">
+                      Accounts to Open
+                    </Box>
+                  )}
+                  {createdAccounts.map((account) => (
+                    <>
+                      <Box key={account.accountId} mb="20px">
+                        <Box border="1px solid #999" p="10px">
+                          <Box fontSize="20px" fontStyle="bold" py="10px">
+                            {accountTypeMapping[account.cdTerm]}
+                          </Box>
+                          <Box d="flex" justifyContent="space-between">
+                            <Box>{accountRateMapping[account.cdTerm]}</Box>
+                            <Box>Deposit: {account.amount}</Box>
+                            <RemoveButton
+                              onClick={() => removeAccount(account.accountId)}
+                            >
+                              Remove
+                            </RemoveButton>
+                          </Box>
+                        </Box>
+                      </Box>
+                    </>
+                  ))}
+                </Box>
+                <Box></Box>
+                <ContinueButton onClick={addAccount}>
+                  {createdAccounts.length > 0
+                    ? "Add Another Account"
+                    : "Add Account"}
+                </ContinueButton>
+                {createdAccounts.length > 0 && (
+                  <>
+                    <Box></Box>
+                    <ContinueButton onClick={nextStep}>Continue</ContinueButton>
+                  </>
+                )}
               </Box>
               {/* More information */}
             </Box>

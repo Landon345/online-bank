@@ -9,10 +9,17 @@ const Home: React.FC<HomeProps> = ({}) => {
   return (
     <Box color="Headline">
       <HomeNavbar />
-      {/* <h1>The Home Component</h1>
-      <h1>The Home Component</h1>
-      <h1>The Home Component</h1>
-      <h1>The Home Component</h1> */}
+      <Box
+        minH="60vh"
+        d="flex"
+        justifyContent="center"
+        alignItems="center"
+        bg="GrayBackground"
+      >
+        <Box fontSize="60px" fontWeight="650" color="teal.400">
+          Welcome to Orion Bank!
+        </Box>
+      </Box>
     </Box>
   );
 };

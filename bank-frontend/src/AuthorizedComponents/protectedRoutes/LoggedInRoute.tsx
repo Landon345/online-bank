@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-function LoggedInRoute({ component: Component, ...rest }) {
+function LoggedInRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (localStorage.getItem("api_key")) {
-          return <Component {...props} />;
+        if (sessionStorage.getItem("api_key")) {
+          return children;
         } else {
           return (
             <Redirect
