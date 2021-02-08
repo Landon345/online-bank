@@ -1,11 +1,10 @@
 const { Client } = require("pg");
+console.log(process.env.ACCESS_TOKEN_SECRET);
 const db = new Client({
-  user: "landonschlangen",
-  password: "CS366",
-  host: "localhost",
-  port: 5432,
-  database: "bank",
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
 });
+
 execute();
 async function execute() {
   await connect();
@@ -14,7 +13,6 @@ async function connect() {
   try {
     await db.connect();
     console.log(`Connected`);
-    // console.log(db);
   } catch (e) {
     console.error(`connection failed ${e}`);
   }

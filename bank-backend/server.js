@@ -1,10 +1,10 @@
-const db = require("./db-connection");
+require("dotenv").config();
+require("./db-connection");
 
 const express = require("express");
 const AuthRoute = require("./routes/Auth");
 const BankAccountRoute = require("./routes/BankAccount");
 const path = require("path");
-
 const app = express();
 
 app.use((req, res, next) => {
