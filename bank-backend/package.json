@@ -9,7 +9,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon server.js"
+    "start": "node server.js",
+    "build": "webpack",
+    "start-server": "nodemon dist/main.js",
+    "watch": "webpack --watch"
   },
   "keywords": [],
   "author": "",
@@ -21,8 +24,13 @@
     "faker": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
     "migrate": "^1.7.0",
-    "nodemon": "^2.0.4",
     "pg": "^8.3.3",
     "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "webpack": "^5.31.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-stream": "^6.1.2"
   }
 }

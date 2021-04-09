@@ -1,2 +1,13 @@
 /node_modules
 .env
+/.pnp
+.pnp.js
+
+# Created by 'webpack'
+/dist
+
+# testing
+/coverage
+
+# production
+/build
