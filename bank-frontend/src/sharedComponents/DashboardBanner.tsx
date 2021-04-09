@@ -26,6 +26,7 @@ const DashboardBanner: React.FC = ({
     };
     setLoginOpen(false);
     fetchAccounts();
+    // eslint-disable-next-line
   }, []);
 
   const accountsTotal = () => {

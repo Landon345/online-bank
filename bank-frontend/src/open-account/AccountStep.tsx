@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box } from "@chakra-ui/core";
 
 import { RouteComponentProps, withRouter } from "react-router-dom";

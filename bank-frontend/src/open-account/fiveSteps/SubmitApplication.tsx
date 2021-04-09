@@ -108,6 +108,7 @@ const SubmitApplication: React.FC<SubmitApplicationProps> = ({
     ) {
       history.push("/open-account/your-information");
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -254,7 +255,7 @@ const SubmitApplication: React.FC<SubmitApplicationProps> = ({
                 console.log("login response", loginResponse);
 
                 if (loginResponse.success) {
-                  const personalInfoResponse = await RegisterPersonalInfo({
+                  await RegisterPersonalInfo({
                     ...personalInformation,
                     username: loginResponse.data.username,
                   });
@@ -265,9 +266,7 @@ const SubmitApplication: React.FC<SubmitApplicationProps> = ({
                       username: loginResponse.data.username,
                     };
                   });
-                  const accountsResponse = await RegisterAccounts(
-                    newCreatedAccounts
-                  );
+                  await RegisterAccounts(newCreatedAccounts);
                 }
 
                 //if the response contains 0 errors, then we move on.

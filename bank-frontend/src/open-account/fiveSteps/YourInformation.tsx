@@ -427,9 +427,7 @@ const YourInformation: React.FC<YourInformationProps> = ({
                         </Box>
                       </Box>
                       <Box d="flex" alignItems="center">
-                        <a href="#">
-                          Why do you need my Social Security number?
-                        </a>
+                        <a>Why do you need my Social Security number?</a>
                       </Box>
                       {/* mother's maiden name */}
                       <Box d="flex" alignItems="center">
