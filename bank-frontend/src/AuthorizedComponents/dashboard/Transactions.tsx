@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Box, Icon } from "@chakra-ui/core";
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { sideLoginOpen, accounts } from "src/recoil/atoms";
-import {
-  GetUserAccounts,
-  GetUser,
-  GetAccountTransactions,
-} from "src/api/account/Account";
+import { Box } from "@chakra-ui/core";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+
+import { GetAccountTransactions } from "src/api/account/Account";
 import AccountsNavbar from "src/sharedComponents/AccountsNavbar";
-import AccountCard from "src/AuthorizedComponents/dashboard/AccountCard";
+
 import DashboardBanner from "src/sharedComponents/DashboardBanner";
 
 type TransactionsProps = {};
@@ -27,6 +22,7 @@ const Transactions: React.FC<TransactionsProps> = ({
       console.log("data :>> ", data);
     };
     fetchTransactions();
+    // eslint-disable-next-line
   }, []);
 
   return (

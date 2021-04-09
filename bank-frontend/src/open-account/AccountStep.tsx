@@ -1,17 +1,9 @@
 import React, { useState } from "react";
-import { Box, Icon } from "@chakra-ui/core";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
-import {
-  RadioInput,
-  RadioLabel,
-  ContinueButton,
-  TextInput,
-  TextLabel,
-} from "src/open-account/style";
+import { Box } from "@chakra-ui/core";
+
+import { RouteComponentProps, withRouter } from "react-router-dom";
+
 import "react-tabs/style/react-tabs.css";
-import HomeNavbar from "src/sharedComponents/HomeNavbar";
-import CDs from "src/view-rates/CDs";
 
 type AccountStepProps = {
   step: 1 | 2 | 3 | 4 | 5;
@@ -26,10 +18,6 @@ const AccountStep: React.FC<AccountStepProps> = ({
   step,
   location,
 }: RouteComponentProps<TParams>) => {
-  const [locationParams, setLocationParams] = useState(
-    location.search ? location.search : ""
-  );
-
   return (
     <Box
       bg="Background"

@@ -1,16 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/core";
-import { GetUserAccounts, GetUser } from "src/api/account/Account";
-import orion from "src/assets/orion.svg";
-import { DropDownButton } from "src/styled/StyledComponents";
-import Sidebar from "src/sharedComponents/Sidebar";
-import Login from "src/sharedComponents/Login";
-import { useRecoilState } from "recoil";
-import { sideLoginOpen, accounts } from "src/recoil/atoms";
-import { SendLogout } from "src/api/auth/Auth";
+import { Box } from "@chakra-ui/core";
 
-type AccountsNavbarProps = {};
 type TParams = {};
 
 const AccountsNavbar: React.FC = ({

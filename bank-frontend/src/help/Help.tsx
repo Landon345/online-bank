@@ -1,10 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 
-type HelpProps = {};
-
-const Help: React.FC = ({}: HelpProps) => {
+const Help: React.FC = () => {
   return (
     <Box>
       <h1>The Help Component</h1>

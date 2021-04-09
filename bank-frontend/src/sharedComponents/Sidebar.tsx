@@ -1,19 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box } from "@chakra-ui/core";
-import { Link } from "react-router-dom";
-import {
-  RadioInput,
-  RadioLabel,
-  ContinueButton,
-  TextInput,
-  TextLabel,
-} from "src/open-account/style";
 import { useRecoilState } from "recoil";
 import { sideLoginOpen } from "src/recoil/atoms";
 
 type SidebarProps = {};
 
 const Sidebar: React.FC<SidebarProps> = ({ children }) => {
+  // eslint-disable-next-line
   const [loginOpen, setLoginOpen] = useRecoilState(sideLoginOpen);
 
   return (

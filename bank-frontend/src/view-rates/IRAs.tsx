@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 import PercentageYieldCard from "src/view-rates/PercentageYieldCard";
 
 type IRAsProps = {};
 
-const IRAs: React.FC<IRAsProps> = ({}) => {
+const IRAs: React.FC<IRAsProps> = () => {
   return (
     <Box color="Headline" p="30px">
       <Box fontSize="25px">IRAs</Box>

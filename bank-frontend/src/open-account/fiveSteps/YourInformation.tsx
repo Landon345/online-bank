@@ -26,9 +26,13 @@ import {
 } from "src/data/MappingData";
 import AccountStep from "src/open-account/AccountStep";
 
+// eslint-disable-next-line
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+// eslint-disable-next-line
 const birthDateExp = /^(((0?[1-9]|1[012])[\/-](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[\/-](29|30)|(0?[13578]|1[02])[\/-]31)[\/-](19|[2-9]\d)\d{2}|0?2[\/-]29[\/-]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))$/;
+// eslint-disable-next-line
 const socialExp = /^\d{3}-\d{2}-\d{4}$/;
+// eslint-disable-next-line
 const zipExp = /(^\d{5}$)|(^\d{9}$)|(^\d{5}-\d{4}$)/;
 const validationSchema = Yup.object().shape({
   firstname: Yup.string()
@@ -119,9 +123,11 @@ const YourInformation: React.FC<YourInformationProps> = ({
 }: RouteComponentProps<TParams>) => {
   const [continued, setContinued] = useState(false);
   const [citizen, setCitizen] = useState(false);
+  // eslint-disable-next-line
   const [createdAccounts, setCreatedAccounts] = useRecoilState(
     createdAccountsState
   );
+  // eslint-disable-next-line
   const [personalInformation, setPersonalInformation] = useRecoilState(
     personalInformationState
   );
@@ -159,9 +165,10 @@ const YourInformation: React.FC<YourInformationProps> = ({
   // ]);
 
   useEffect(() => {
-    if (createdAccounts.length == 0) {
+    if (createdAccounts.length === 0) {
       history.push("/open-account/");
     }
+    // eslint-disable-next-line
   }, []);
 
   const initialValues: InfoFormValues = {
@@ -420,7 +427,9 @@ const YourInformation: React.FC<YourInformationProps> = ({
                         </Box>
                       </Box>
                       <Box d="flex" alignItems="center">
-                        <a>Why do you need my Social Security number?</a>
+                        <a href="#">
+                          Why do you need my Social Security number?
+                        </a>
                       </Box>
                       {/* mother's maiden name */}
                       <Box d="flex" alignItems="center">
@@ -472,7 +481,7 @@ const YourInformation: React.FC<YourInformationProps> = ({
                         </Box>
                       </Box>
                       <Box d="flex" alignItems="center">
-                        <a>Why do we need to know your occupation?</a>
+                        <a href="#">Why do we need to know your occupation?</a>
                       </Box>
                     </Box>
 
@@ -708,7 +717,7 @@ const YourInformation: React.FC<YourInformationProps> = ({
                             id="mailingAddress"
                             name="mailingAddress"
                             value="true"
-                            defaultChecked={values.mailingAddress == "true"}
+                            defaultChecked={values.mailingAddress === "true"}
                           />
                           Yes
                         </RadioLabel>
@@ -718,7 +727,7 @@ const YourInformation: React.FC<YourInformationProps> = ({
                             id="mailingAddress"
                             name="mailingAddress"
                             value="false"
-                            defaultChecked={values.mailingAddress == "false"}
+                            defaultChecked={values.mailingAddress === "false"}
                           />
                           No
                         </RadioLabel>
@@ -741,7 +750,7 @@ const YourInformation: React.FC<YourInformationProps> = ({
                             id="previousAddress"
                             name="previousAddress"
                             value="true"
-                            defaultChecked={values.previousAddress == "true"}
+                            defaultChecked={values.previousAddress === "true"}
                           />
                           Yes
                         </RadioLabel>
@@ -751,7 +760,7 @@ const YourInformation: React.FC<YourInformationProps> = ({
                             id="previousAddress"
                             name="previousAddress"
                             value="false"
-                            defaultChecked={values.previousAddress == "false"}
+                            defaultChecked={values.previousAddress === "false"}
                           />
                           No
                         </RadioLabel>

@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 import PercentageYieldCard from "src/view-rates/PercentageYieldCard";
 
 type CheckingProps = {};
 
-const Checking: React.FC<CheckingProps> = ({}) => {
+const Checking: React.FC<CheckingProps> = () => {
   return (
     <Box color="Headline" p="30px">
       <Box fontSize="25px">Checking and Money Market</Box>

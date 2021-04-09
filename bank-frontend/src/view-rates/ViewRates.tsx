@@ -11,7 +11,7 @@ import IRAs from "src/view-rates/IRAs";
 
 type ViewRatesProps = {};
 
-const ViewRates: React.FC<ViewRatesProps> = ({}) => {
+const ViewRates: React.FC<ViewRatesProps> = () => {
   return (
     <Box>
       <HomeNavbar />

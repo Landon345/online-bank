@@ -1,0 +1,6 @@
+{
+  "eslint.codeActionsOnSave.mode": "problems",
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
+  }
+}

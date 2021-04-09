@@ -1,20 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Box, Icon } from "@chakra-ui/core";
+import React, { useEffect, useState } from "react";
+import { Box } from "@chakra-ui/core";
 import { accountTypeMapping } from "src/data/MappingData";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import * as faqs from "src/data/FAQsData";
-import {
-  RadioInput,
-  RadioLabel,
-  ContinueButton,
-  TextInput,
-  TextLabel,
-} from "src/open-account/style";
+import { RadioInput, RadioLabel, ContinueButton } from "src/open-account/style";
 import Login from "src/sharedComponents/Login";
 import "react-tabs/style/react-tabs.css";
 import FAQs from "src/open-account/FAQs";
-import HomeNavbar from "src/sharedComponents/HomeNavbar";
-import CDs from "src/view-rates/CDs";
 
 type OpenAccountProps = {
   OAP: string;
@@ -28,6 +20,7 @@ const OpenAccount: React.FC = ({
   history,
   location,
 }: RouteComponentProps<TParams>) => {
+  // eslint-disable-next-line
   const [locationParams, setLocationParams] = useState(
     location.search ? location.search.split("=")[1] : ""
   );

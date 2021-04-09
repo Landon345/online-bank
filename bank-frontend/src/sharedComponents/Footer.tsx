@@ -30,7 +30,7 @@ const FooterLinks = {
   Terms: ["Orion Invest Disclosures", "Legal", "Privacy", "Security"],
 };
 
-const Footer: React.FC<FooterProps> = ({}) => {
+const Footer: React.FC<FooterProps> = () => {
   return (
     <Box minH="20vh" bg="white">
       <Box mx="10%" mt="20px" d="flex" justifyContent="center">

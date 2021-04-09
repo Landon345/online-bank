@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoggedInRoute from "src/AuthorizedComponents/protectedRoutes/LoggedInRoute";
 import { Box } from "@chakra-ui/core";
 import { ThemeProvider } from "emotion-theming";
-import {
-  lightTheme1,
-  lightTheme2,
-  darkTheme1,
-  darkTheme2,
-  darkPine,
-} from "src/styled/bankTheme";
+import { lightTheme1 } from "src/styled/bankTheme";
 import Navbar from "src/sharedComponents/Navbar";
 import Home from "src/home/Home";
 import Help from "src/help/Help";

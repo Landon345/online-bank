@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Box, Button, Icon } from "@chakra-ui/core";
+
+import { Box, Icon } from "@chakra-ui/core";
 import DropDown from "src/home/DropDown";
 
-type HomeNavbarProps = {};
-
-const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
+const HomeNavbar: React.FC = () => {
   const [showDropDown, setShowDropDown] = useState("");
   const dropdown = (type: string) => {
-    if (showDropDown == type) {
+    if (showDropDown === type) {
       setShowDropDown("");
     } else {
       setShowDropDown(type);
@@ -27,7 +25,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
       >
         <Box
           onClick={() => dropdown("savings")}
-          color={showDropDown == "savings" ? "Button" : "Headline"}
+          color={showDropDown === "savings" ? "Button" : "Headline"}
           py="22px"
           mr="20px"
           cursor="pointer"
@@ -38,7 +36,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
 
         <Box
           onClick={() => dropdown("investing")}
-          color={showDropDown == "investing" ? "Button" : "Headline"}
+          color={showDropDown === "investing" ? "Button" : "Headline"}
           py="22px"
           mr="20px"
           cursor="pointer"
@@ -48,7 +46,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
         </Box>
         <Box
           onClick={() => dropdown("mortgage")}
-          color={showDropDown == "mortgage" ? "Button" : "Headline"}
+          color={showDropDown === "mortgage" ? "Button" : "Headline"}
           py="22px"
           mr="20px"
           cursor="pointer"
@@ -58,7 +56,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
         </Box>
         <Box
           onClick={() => dropdown("auto")}
-          color={showDropDown == "auto" ? "Button" : "Headline"}
+          color={showDropDown === "auto" ? "Button" : "Headline"}
           py="22px"
           mr="20px"
           cursor="pointer"
@@ -68,7 +66,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
         </Box>
         <Box
           onClick={() => dropdown("personal")}
-          color={showDropDown == "personal" ? "Button" : "Headline"}
+          color={showDropDown === "personal" ? "Button" : "Headline"}
           py="22px"
           mr="20px"
           cursor="pointer"
@@ -77,7 +75,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
           Personal Loans <Icon name="chevron-down" />
         </Box>
       </Box>
-      {showDropDown == "savings" && (
+      {showDropDown === "savings" && (
         <>
           <DropDown
             text={
@@ -147,7 +145,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
           />
         </>
       )}
-      {showDropDown == "investing" && (
+      {showDropDown === "investing" && (
         <>
           <DropDown
             text={
@@ -215,7 +213,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
           />
         </>
       )}
-      {showDropDown == "mortgage" && (
+      {showDropDown === "mortgage" && (
         <>
           <DropDown
             text={
@@ -278,7 +276,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
           />
         </>
       )}
-      {showDropDown == "auto" && (
+      {showDropDown === "auto" && (
         <>
           <DropDown
             text=""
@@ -336,7 +334,7 @@ const HomeNavbar: React.FC = ({}: HomeNavbarProps) => {
           />
         </>
       )}
-      {showDropDown == "personal" && (
+      {showDropDown === "personal" && (
         <>
           <DropDown
             text={

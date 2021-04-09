@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 import { OpenAccountButton } from "src/styled/StyledComponents";
 import { Icon } from "@chakra-ui/core";
 
@@ -71,8 +71,8 @@ const PercentageYieldCard: React.FC<PercentageYieldCardProps> = ({
                       alignItems="center"
                       justifyContent="center"
                       cursor="pointer"
-                      bg={term.time == mapterm.time ? "Gray" : "Background"}
-                      color={term.time == mapterm.time ? "White" : "Link"}
+                      bg={term.time === mapterm.time ? "Gray" : "Background"}
+                      color={term.time === mapterm.time ? "White" : "Link"}
                       onClick={() => setTerm(mapterm)}
                     >
                       <Box>{mapterm.time.split(" ")[0]}</Box>

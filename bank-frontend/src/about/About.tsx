@@ -1,10 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 
-type AboutProps = {};
-
-const About: React.FC = ({}: AboutProps) => {
+const About: React.FC = () => {
   return (
     <Box>
       <h1>The About Component</h1>

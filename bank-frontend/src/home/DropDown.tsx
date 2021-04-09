@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 import { DropDownButton } from "src/styled/StyledComponents";
 import { DropDownContainer } from "src/home/style";
 

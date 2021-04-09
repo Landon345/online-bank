@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 import HomeNavbar from "src/sharedComponents/HomeNavbar";
 
 type HomeProps = {};
 
-const Home: React.FC<HomeProps> = ({}) => {
+const Home: React.FC<HomeProps> = () => {
   return (
     <Box color="Headline">
       <HomeNavbar />

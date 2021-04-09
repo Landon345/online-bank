@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter, RouteComponentProps } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/core";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { Box } from "@chakra-ui/core";
 import { GetUserAccounts, GetUser } from "src/api/account/Account";
-import orion from "src/assets/orion.svg";
-import { DropDownButton } from "src/styled/StyledComponents";
-import Sidebar from "src/sharedComponents/Sidebar";
-import Login from "src/sharedComponents/Login";
+
 import { useRecoilState } from "recoil";
 import { sideLoginOpen, accounts } from "src/recoil/atoms";
-import { SendLogout } from "src/api/auth/Auth";
 
 type DashboardBannerProps = {};
 type TParams = {};
@@ -16,6 +12,7 @@ type TParams = {};
 const DashboardBanner: React.FC = ({
   history,
 }: RouteComponentProps<TParams>) => {
+  // eslint-disable-next-line
   const [loginOpen, setLoginOpen] = useRecoilState(sideLoginOpen);
   const [user, setUser] = useState({ firstname: "", lastname: "" });
   const [myaccounts, setmyAccounts] = useRecoilState(accounts);

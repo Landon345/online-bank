@@ -56,9 +56,11 @@ const SubmitApplication: React.FC<SubmitApplicationProps> = ({
   history,
   location,
 }: RouteComponentProps<TParams>) => {
+  // eslint-disable-next-line
   const [personalInformation, setPersonalInformation] = useRecoilState(
     personalInformationState
   );
+  // eslint-disable-next-line
   const [createdAccounts, setCreatedAccounts] = useRecoilState(
     createdAccountsState
   );
@@ -98,7 +100,7 @@ const SubmitApplication: React.FC<SubmitApplicationProps> = ({
   const [verified, setVerified] = useState(false);
 
   useEffect(() => {
-    if (createdAccounts.length == 0) {
+    if (createdAccounts.length === 0) {
       history.push("/open-account/");
     } else if (
       !personalInformation.firstname &&
@@ -125,7 +127,7 @@ const SubmitApplication: React.FC<SubmitApplicationProps> = ({
           <Box>
             {createdAccounts.map((account) => (
               <Box key={account.accountId} mb="20px">
-                {account.accountCategory == "CD" ? (
+                {account.accountCategory === "CD" ? (
                   <>
                     <Box fontSize="20px" fontStyle="bold" py="10px">
                       {accountTermOnlyMapping[account.cdTerm]}

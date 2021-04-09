@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 import orion from "src/assets/orion.svg";
 import { DropDownButton } from "src/styled/StyledComponents";
 import Sidebar from "src/sharedComponents/Sidebar";
@@ -15,7 +15,7 @@ type TParams = {};
 const Navbar: React.FC = ({ history }: RouteComponentProps<TParams>) => {
   const [loginOpen, setLoginOpen] = useRecoilState(sideLoginOpen);
   const Logout = async () => {
-    const response = await SendLogout();
+    await SendLogout();
     sessionStorage.removeItem("api_key");
     history.push("/");
   };

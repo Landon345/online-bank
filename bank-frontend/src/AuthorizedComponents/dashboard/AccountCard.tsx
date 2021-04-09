@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Box, Icon } from "@chakra-ui/core";
+import React from "react";
+import { Box } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { sideLoginOpen } from "src/recoil/atoms";
-import AccountsNavbar from "src/sharedComponents/AccountsNavbar";
 import { accountTypeMapping } from "src/data/MappingData";
 import { ContinueButton } from "src/open-account/style";
 

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Box, Icon } from "@chakra-ui/core";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Box } from "@chakra-ui/core";
 import { useRecoilState } from "recoil";
-import { sideLoginOpen, accounts } from "src/recoil/atoms";
+import { accounts } from "src/recoil/atoms";
 import AccountsNavbar from "src/sharedComponents/AccountsNavbar";
 import AccountCard from "src/AuthorizedComponents/dashboard/AccountCard";
 import DashboardBanner from "src/sharedComponents/DashboardBanner";
@@ -10,6 +9,7 @@ import DashboardBanner from "src/sharedComponents/DashboardBanner";
 type DashboardProps = {};
 
 const Dashboard: React.FC<DashboardProps> = ({ children }) => {
+  // eslint-disable-next-line
   const [myaccounts, setmyAccounts] = useRecoilState(accounts);
 
   return (

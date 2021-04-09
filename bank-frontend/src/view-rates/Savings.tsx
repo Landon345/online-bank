@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 import PercentageYieldCard from "src/view-rates/PercentageYieldCard";
 
 type SavingsProps = {};
 
-const Savings: React.FC<SavingsProps> = ({}) => {
+const Savings: React.FC<SavingsProps> = () => {
   return (
     <Box color="Headline" p="30px">
       <Box fontSize="25px">Savings</Box>

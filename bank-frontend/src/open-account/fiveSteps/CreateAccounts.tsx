@@ -11,7 +11,6 @@ import {
   ContinueButton,
   TextInput,
   RemoveButton,
-  TextLabel,
 } from "src/open-account/style";
 import AccountStep from "src/open-account/AccountStep";
 import {
@@ -41,7 +40,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
       "sav"
   );
   const [IRAType, setIRAType] = useState(
-    sessionStorage.getItem("accountpreset")?.split("-")[0] == "IRAOSA"
+    sessionStorage.getItem("accountpreset")?.split("-")[0] === "IRAOSA"
       ? "IRAOSA"
       : "IRACD" || "IRACD"
   );
@@ -65,11 +64,11 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
     // "DDA-0": "Interest Checking",
     // "MMDA-0": "Money Market Savings",
     if (value !== "CD") {
-      if (value == "mm") {
+      if (value === "mm") {
         setCDTerm("MMDA-0");
-      } else if (value == "check") {
+      } else if (value === "check") {
         setCDTerm("DDA-0");
-      } else if (value == "sav") {
+      } else if (value === "sav") {
         setCDTerm("OSAV-0");
       } else {
         setCDTerm("");
@@ -81,10 +80,10 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
   };
 
   const showAmount = () => {
-    return (accountCategory == "CD" && cdTerm) || accountCategory != "CD";
+    return (accountCategory === "CD" && cdTerm) || accountCategory !== "CD";
   };
   const showOptions = () => {
-    return accountCategory == "mm" || accountCategory == "check";
+    return accountCategory === "mm" || accountCategory === "check";
   };
 
   const addAccount = () => {
@@ -105,7 +104,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
   };
   const removeAccount = (id) => {
     setCreatedAccounts((prev) =>
-      prev.filter((account) => account.accountId != id)
+      prev.filter((account) => account.accountId !== id)
     );
   };
   const nextStep = async () => {
@@ -129,7 +128,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                   gridRowGap={10}
                   mt="20px"
                 >
-                  {createdAccounts.length == 0 && (
+                  {createdAccounts.length === 0 && (
                     <>
                       <Box mt="10px" fontWeight="600">
                         Select Account Type
@@ -198,7 +197,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                         id="onlineSavingsAccountCategory"
                         name="AccountCategory"
                         value="sav"
-                        defaultChecked={accountCategory == "sav"}
+                        defaultChecked={accountCategory === "sav"}
                       />{" "}
                       Online Savings
                     </RadioLabel>
@@ -208,7 +207,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                         id="moneyMarketAccountCategory"
                         name="AccountCategory"
                         value="mm"
-                        defaultChecked={accountCategory == "mm"}
+                        defaultChecked={accountCategory === "mm"}
                       />{" "}
                       Money Market
                     </RadioLabel>
@@ -218,7 +217,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                         id="CDsAccountCategory"
                         name="AccountCategory"
                         value="CD"
-                        defaultChecked={accountCategory == "CD"}
+                        defaultChecked={accountCategory === "CD"}
                       />{" "}
                       Certificates of Deposit (CDs)
                     </RadioLabel>
@@ -228,7 +227,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                         id="interestCheckingAccountCategory"
                         name="AccountCategory"
                         value="check"
-                        defaultChecked={accountCategory == "check"}
+                        defaultChecked={accountCategory === "check"}
                       />{" "}
                       Interest Checking
                     </RadioLabel>
@@ -238,12 +237,12 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                         id="IRAAccountCategory"
                         name="AccountCategory"
                         value="IRA"
-                        defaultChecked={accountCategory == "IRA"}
+                        defaultChecked={accountCategory === "IRA"}
                       />{" "}
                       IRA
                     </RadioLabel>
                   </Box>
-                  {accountCategory == "CD" && (
+                  {accountCategory === "CD" && (
                     <>
                       <Box mt="10px" fontWeight="600">
                         Term
@@ -261,7 +260,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                       </Select>
                     </>
                   )}
-                  {accountCategory == "IRA" && (
+                  {accountCategory === "IRA" && (
                     <>
                       <Box mt="10px" fontWeight="600">
                         IRA Plan
@@ -273,7 +272,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                             id="IRAPlan"
                             name="IRAPlan"
                             value="Traditional"
-                            defaultChecked={IRAPlan == "Traditional"}
+                            defaultChecked={IRAPlan === "Traditional"}
                           />{" "}
                           Traditional
                         </RadioLabel>
@@ -283,7 +282,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                             id="IRAPlan"
                             name="IRAPlan"
                             value="Roth"
-                            defaultChecked={IRAPlan == "Roth"}
+                            defaultChecked={IRAPlan === "Roth"}
                           />{" "}
                           Roth
                         </RadioLabel>
@@ -293,14 +292,14 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                             id="IRAPlan"
                             name="IRAPlan"
                             value="SEP"
-                            defaultChecked={IRAPlan == "SEP"}
+                            defaultChecked={IRAPlan === "SEP"}
                           />{" "}
                           SEP
                         </RadioLabel>
                       </Box>
                     </>
                   )}
-                  {accountCategory == "IRA" && (
+                  {accountCategory === "IRA" && (
                     <>
                       <Box mt="10px" fontWeight="600">
                         Type
@@ -316,7 +315,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                       </Select>
                     </>
                   )}
-                  {accountCategory == "IRA" && IRAType !== "IRAOSA" && (
+                  {accountCategory === "IRA" && IRAType !== "IRAOSA" && (
                     <>
                       <Box mt="10px" fontWeight="600">
                         Term
@@ -386,7 +385,7 @@ const CreateAccounts: React.FC<CreateAccountsProps> = ({
                           />{" "}
                           Free Orion Bank Standard Checks
                         </CheckBoxLabel>
-                        {accountCategory == "check" && (
+                        {accountCategory === "check" && (
                           <CheckBoxLabel htmlFor="transfer">
                             <CheckBoxInput
                               type="checkbox"
