@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 module.exports = {
   target: "node",
   mode: "development",
@@ -5,4 +7,9 @@ module.exports = {
   resolve: {
     modules: ["server", "node_modules"],
   },
+  plugins: [
+    new webpack.IgnorePlugin(/^pg-native$/),
+    // Or, for WebPack 4+:
+    new webpack.IgnorePlugin({ resourceRegExp: /^pg-native$/ }),
+  ],
 };
