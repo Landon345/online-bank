@@ -427,7 +427,7 @@ const YourInformation: React.FC<YourInformationProps> = ({
                         </Box>
                       </Box>
                       <Box d="flex" alignItems="center">
-                        <a>Why do you need my Social Security number?</a>
+                        <div>Why do you need my Social Security number?</div>
                       </Box>
                       {/* mother's maiden name */}
                       <Box d="flex" alignItems="center">
@@ -479,7 +479,7 @@ const YourInformation: React.FC<YourInformationProps> = ({
                         </Box>
                       </Box>
                       <Box d="flex" alignItems="center">
-                        <a href="#">Why do we need to know your occupation?</a>
+                        <div>Why do we need to know your occupation?</div>
                       </Box>
                     </Box>
 
@@ -765,7 +765,7 @@ const YourInformation: React.FC<YourInformationProps> = ({
                       </Box>
                       <Box></Box>
                       <Box>
-                        <a>Why do you need to know my address history?</a>
+                        <div>Why do you need to know my address history?</div>
                       </Box>
                     </Box>
                     <Box ml="200px">
